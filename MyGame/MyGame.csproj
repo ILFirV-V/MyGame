@@ -84,10 +84,18 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Sprites\Adventurer.png" />
+    <Content Include="Sprites\Brain.png" />
+    <Content Include="Sprites\Cyclops.png" />
+    <Content Include="Sprites\Dungeon.png" />
+    <Content Include="Sprites\Hedgehog.png" />
+    <Content Include="Sprites\Leaf.png" />
+    <Content Include="Sprites\Leshy.png" />
     <Content Include="Sprites\Player.png" />
     <Content Include="Sprites\Destructible.png" />
     <Content Include="Sprites\Fox.png" />
     <Content Include="Sprites\Minotaur.png" />
+    <Content Include="Sprites\Shardsoul.png" />
+    <Content Include="Sprites\Twig.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

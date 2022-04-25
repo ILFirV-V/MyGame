@@ -29,6 +29,8 @@ namespace MyGame
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // Form1
@@ -36,6 +38,7 @@ namespace MyGame
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
@@ -44,6 +47,8 @@ namespace MyGame
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
