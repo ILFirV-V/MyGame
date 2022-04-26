@@ -8,9 +8,9 @@ namespace MyGame.Models
 {
     public static class Hero
     {
-        public static int idleFrames = 5;
-        public static int runFrames = 3;
-        public static int attackFrames = 3;
+        public static int idleFrames = 8;
+        public static int runFrames = 8;
+        public static int attackFrames = 4;
         public static int deathFrames = 5;
     }
 }

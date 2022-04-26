@@ -61,18 +61,33 @@ namespace MyGame
             {
                 case Keys.W:
                     player.dirY = -2;
+                    player.isMoving = true;
+                    player.SetAnimathilonConfiguration(1);
                     break;
                 case Keys.S:
                     player.dirY = 2;
+                    player.isMoving = true;
+                    player.SetAnimathilonConfiguration(1);
                     break;
                 case Keys.D:
                     player.dirX = 2;
+                    player.isMoving = true;
+                    player.flip = 1;
+                    player.SetAnimathilonConfiguration(1);
                     break;
                 case Keys.A:
                     player.dirX = -2;
+                    player.isMoving = true;
+                    player.flip = -1;
+                    player.SetAnimathilonConfiguration(1);
+                    break;
+                case Keys.Space:
+                    player.dirX = 0;
+                    player.dirY = 0;
+                    player.isMoving = false;
+                    player.SetAnimathilonConfiguration(5);
                     break;
             }
-            player.isMoving = true;
         }
 
         public void OnKeyUp(object sender, KeyEventArgs e)
@@ -80,12 +95,13 @@ namespace MyGame
             player.dirX = 0;
             player.dirY = 0;
             player.isMoving = false;
+            player.SetAnimathilonConfiguration(0);
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
-            player.Play(sender, g);
+            player.PlayAnimation(sender, g);
         }
     }
 }
