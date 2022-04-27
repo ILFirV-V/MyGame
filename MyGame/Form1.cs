@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using MyGame.Controllers;
 using MyGame.Entites;
 using MyGame.Models;
 
@@ -16,9 +17,11 @@ namespace MyGame
 {
     public partial class Form1 : Form
     {
+        
         public Image playerSheet;
         public Image minotaurSheet;
         private Entity player;
+        
 
         public Form1()
         {
@@ -32,17 +35,14 @@ namespace MyGame
             Init();
         }
 
-
-
         public void Init()
         {
+            MapController.Init();
+            Width = MapController.GetWidth();
+            Height = MapController.GetHeight();
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfo != null)
-                playerSheet =
-                    new Bitmap(Path.Combine(
-                        directoryInfo.Parent.FullName,
-                        "Sprites\\Player.png"));
-
+                playerSheet = new Bitmap(Path.Combine(directoryInfo.Parent.FullName, "Sprites\\Player.png"));
             player = new Entity(100, 100, Hero.idleFrames, Hero.runFrames, Hero.attackFrames, Hero.deathFrames, playerSheet, 30);
 
             timer1.Start();
@@ -101,6 +101,7 @@ namespace MyGame
         private void OnPaint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
+            MapController.DrawMap(g);
             player.PlayAnimation(sender, g);
         }
     }

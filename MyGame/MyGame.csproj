@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Entites\Entity.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -81,7 +82,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Sprites\MapImages\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Sprites\Adventurer.png" />
     <Content Include="Sprites\Brain.png" />
@@ -95,6 +98,7 @@
     <Content Include="Sprites\Fox.png" />
     <Content Include="Sprites\Minotaur.png" />
     <Content Include="Sprites\Shardsoul.png" />
+    <Content Include="Sprites\Tiles.png" />
     <Content Include="Sprites\Twig.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
