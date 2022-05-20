@@ -52,20 +52,6 @@ namespace MyGame.Models
                     directoryInfo.Parent.FullName, "Sprites\\Tiles.png"));
         }
 
-        public static void DrawMap(Graphics g)
-        {
-            for (var i = 0; i < mapHeight; i++)
-            {
-                for (var j = 0; j < mapWidth; j++)
-                {
-                    if (map[i, j] == 1)
-                    {
-                        g.DrawImage(MapImage, new Rectangle(new Point(i * MapSize, j * MapSize), new Size(MapSize, MapSize)), 320, 140, 15, 15, GraphicsUnit.Pixel);
-                    }
-                }
-            }
-        }
-
         public static int GetWidth()
         {
             return MapSize * mapWidth;
@@ -74,6 +60,11 @@ namespace MyGame.Models
         public static int GetHeight()
         {
             return MapSize * mapHeight;
+        }
+
+        public static int getMapPieceType(int i, int j)
+        {
+            return map[i, j];
         }
     }
 }

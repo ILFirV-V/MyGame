@@ -55,7 +55,7 @@ namespace MyGame
         private void OnPaint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
-            Map.DrawMap(g);
+            ViewMap.DrawMap(g);
             ViewPlayer.PlayerAnimation(sender, g, player);
         }
     }
