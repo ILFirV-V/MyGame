@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\ControllerPlayer.cs" />
+    <Compile Include="Controllers\PhysicsControllerPlayer.cs" />
     <Compile Include="Entites\Entity.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

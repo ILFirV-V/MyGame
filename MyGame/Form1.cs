@@ -24,19 +24,19 @@ namespace MyGame
         public Form1()
         {
             InitializeComponent();
-            timer1.Interval = 25;
+            timer1.Interval = 30;
             timer1.Tick += Update;
             Init();
             controller = new ControllerPlayer(player);
             KeyDown += controller.OnPress;
             KeyUp += controller.OnKeyUp;
-            Load += (sender, args) => OnSizeChanged(EventArgs.Empty);
-            SizeChanged += (sender, args) =>
-            {
-                player.positionX = ClientSize.Width - 100;
-                player.positionY = ClientSize.Height - 100;
-                Map.size = new Size(ClientSize.Width, ClientSize.Height);
-            };
+
+            WindowState = FormWindowState.Maximized;
+            //FormBorderStyle = FormBorderStyle.None;
+            player.positionX = Right + 329;
+            player.positionY = Bottom - 24;
+            MaximizeBox = false;
+
         }
 
         public void Init()

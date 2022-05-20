@@ -69,5 +69,23 @@ namespace MyGame.Models
                     break;
             }
         }
+
+        public bool InConflict(int positionX, int positionY)
+        {
+            if (Map.getMapPieceType(positionX / 30, positionY / 27) == 2)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool IsAir(int positionX, int positionY)
+        {
+            if (Map.getMapPieceType(positionX / 30, positionY / 27) == 1)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
