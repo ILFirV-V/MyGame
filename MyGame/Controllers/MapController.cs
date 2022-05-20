@@ -15,7 +15,7 @@
 //        public const int mapWidth = 20;
 //        public static int[,] map = new int[mapHeight, mapWidth];
 //        public static Image MapImage;
-//        public static int MapSize = 31;
+//        public static int constSize = 31;
 
 //        public static int[,] GetMap()
 //        {
@@ -61,7 +61,7 @@
 //                {
 //                    if (map[i, j] == 1)
 //                    {
-//                        g.DrawImage(MapImage, new Rectangle(new Point(i * MapSize, j * MapSize), new Size(MapSize, MapSize)), 320, 140, 15, 15, GraphicsUnit.Pixel);
+//                        g.DrawImage(MapImage, new Rectangle(new Point(i * constSize, j * constSize), new Size(constSize, constSize)), 320, 140, 15, 15, GraphicsUnit.Pixel);
 //                    }
 //                }
 //            }
@@ -69,12 +69,12 @@
 
 //        public static int GetWidth()
 //        {
-//            return MapSize * mapWidth;
+//            return constSize * mapWidth;
 //        }
 
 //        public static int GetHeight()
 //        {
-//            return MapSize * mapHeight;
+//            return constSize * mapHeight;
 //        }
 //    }
 //}

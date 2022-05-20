@@ -12,9 +12,9 @@ namespace MyGame.Models
     {
         public const int mapHeight = 20;
         public const int mapWidth = 20;
+        public static Size size = new Size(mapWidth, mapHeight);
         public static int[,] map = new int[mapHeight, mapWidth];
         public static Image MapImage;
-        public static int MapSize = 31;
 
         public static int[,] GetMap()
         {
@@ -54,12 +54,12 @@ namespace MyGame.Models
 
         public static int GetWidth()
         {
-            return MapSize * mapWidth;
+            return size.Width;
         }
 
         public static int GetHeight()
         {
-            return MapSize * mapHeight;
+            return size.Height;
         }
 
         public static int getMapPieceType(int i, int j)

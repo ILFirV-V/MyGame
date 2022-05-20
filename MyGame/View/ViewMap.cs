@@ -18,7 +18,7 @@ namespace MyGame.View
                 {
                     if (Map.getMapPieceType(i, j) == 1)
                     {
-                        g.DrawImage(Map.MapImage, new Rectangle(new Point(i * Map.MapSize, j * Map.MapSize), new Size(Map.MapSize, Map.MapSize)), 320, 140, 15, 15, GraphicsUnit.Pixel);
+                        g.DrawImage(Map.MapImage, new Rectangle(new Point(i * Map.size.Width, j * Map.size.Height), Map.size), 320, 140, 15, 15, GraphicsUnit.Pixel);
                     }
                 }
             }

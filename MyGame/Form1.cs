@@ -30,13 +30,18 @@ namespace MyGame
             controller = new ControllerPlayer(player);
             KeyDown += controller.OnPress;
             KeyUp += controller.OnKeyUp;
+            Load += (sender, args) => OnSizeChanged(EventArgs.Empty);
+            SizeChanged += (sender, args) =>
+            {
+                player.positionX = ClientSize.Width - 100;
+                player.positionY = ClientSize.Height - 100;
+                Map.size = new Size(ClientSize.Width, ClientSize.Height);
+            };
         }
 
         public void Init()
         {
             Map.Init();
-            Width = Map.GetWidth();
-            Height = Map.GetHeight();
 
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfo != null)
