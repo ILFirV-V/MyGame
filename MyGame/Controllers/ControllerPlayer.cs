@@ -21,7 +21,7 @@ namespace MyGame.Controllers
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    if (player.InConflict(player.positionX, player.positionY - 81))
+                    if (player.InConflict(player.positionX, player.positionY - 70))
                     {
                         player.changeY = 0;
                         player.isMoving = false;
@@ -51,7 +51,7 @@ namespace MyGame.Controllers
 
                     break;
                 case Keys.D:
-                    player.changeX = 2;
+                    player.changeX = 6;
                     player.isMoving = true;
                     player.direction = 1;
                     player.changeAnimation(1);

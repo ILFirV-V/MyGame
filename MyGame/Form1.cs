@@ -18,7 +18,9 @@ namespace MyGame
     public partial class Form1 : Form
     {
         public Image playerSheet;
+        public Image minotaurSheet;
         private Player player;
+        private Enemy minotaur;
         private ControllerPlayer controller;
 
         public Form1()
@@ -28,6 +30,7 @@ namespace MyGame
             timer1.Tick += Update;
             Init();
             controller = new ControllerPlayer(player);
+            //minotaur = new Enemy(player);
             KeyDown += controller.OnPress;
             KeyUp += controller.OnKeyUp;
 
@@ -35,6 +38,8 @@ namespace MyGame
             //FormBorderStyle = FormBorderStyle.None;
             player.positionX = Right + 329;
             player.positionY = Bottom - 24;
+            //minotaur.positionX = Right + 329;
+            //minotaur.positionY = Bottom - 100;
             MaximizeBox = false;
 
         }
@@ -43,10 +48,16 @@ namespace MyGame
         {
             Map.Init();
 
-            var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
-            if (directoryInfo != null)
-                playerSheet = new Bitmap(Path.Combine(directoryInfo.Parent.FullName, "Sprites\\Player.png"));
+            var directoryInfoPlayer = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
+            if (directoryInfoPlayer != null)
+                playerSheet = new Bitmap(Path.Combine(directoryInfoPlayer.Parent.FullName, "Sprites\\Player.png"));
             player = new Player(100, 100, playerSheet, 30, 1, 8, 4, 5);
+
+            //var directoryInfoMinotaur = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
+            //if (directoryInfoMinotaur != null)
+            //    minotaurSheet = new Bitmap(Path.Combine(directoryInfoMinotaur.Parent.FullName, "Sprites\\Minotaur.png"));
+            //minotaur = new Enemy(100, 100, minotaurSheet, 30, 1, 8, 9, 6);
+
             timer1.Start();
         }
 
@@ -54,6 +65,7 @@ namespace MyGame
         {
             if (player.isMoving)
                 player.Move();
+            //minotaur.Move();
             Invalidate();
         }
 
@@ -61,6 +73,7 @@ namespace MyGame
         {
             var g = e.Graphics;
             ViewMap.DrawMap(g);
+            //ViewEnemy.EnemyAnimation(sender, g, minotaur);
             ViewPlayer.PlayerAnimation(sender, g, player);
         }
     }
