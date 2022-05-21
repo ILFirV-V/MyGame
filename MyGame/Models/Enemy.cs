@@ -11,15 +11,9 @@ namespace MyGame.Models
     class Enemy
     {
         private readonly Player player;
-        public Enemy(Player player)
-        {
-            this.player = player;
-        }
-
         public int positionX;
         public int positionY;
         public int changeX;
-        public int changeY;
 
         public int direction;
 
@@ -38,7 +32,7 @@ namespace MyGame.Models
 
 
         public Enemy(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames,
-            int deathFrames)
+            int deathFrames, Player player)
         {
             positionX = posX;
             positionY = posY;
@@ -50,6 +44,7 @@ namespace MyGame.Models
             this.attackFrames = attackFrames;
             this.deathFrames = deathFrames;
             currentFrame = 0;
+            this.player = player;
         }
 
         public void changeAnimation(int currentAnimation)
@@ -75,7 +70,14 @@ namespace MyGame.Models
         public void Move()
         {
             if (IsSeePlayer(player.positionY))
-                positionY += changeY;
+            {
+                isMoving = true;
+                positionX += changeX;
+            }
+            else
+            {
+                isMoving = false;
+            }
         }
 
         public bool IsSeePlayer(int positionPlayerY)

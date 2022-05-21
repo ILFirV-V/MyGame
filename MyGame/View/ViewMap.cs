@@ -34,6 +34,45 @@ namespace MyGame.View
                         case 4:
                             PaintMap(g, i, j, 180, 40);
                             break;
+                        case 5:
+                            PaintMap(g, i, j, 140, 60);
+                            break;
+                        case 6:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, 260, 140);
+                            break;
+                        case 7:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, 280, 140);
+                            break;
+                        case 8:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, 300, 140);
+                            break;
+                        case 9:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, 140, 60);
+                            break;
+                        case 10:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, 200, 120);
+                            break;
+                        case 11:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, 200, 100);
+                            break;
+                        case 12:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, 120, 120);
+                            break;
+                        case 13:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, 80, 40);
+                            break;
+                        case 14:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, 200, 160);
+                            break;
                     }
                 }
             }

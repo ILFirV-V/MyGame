@@ -28,7 +28,7 @@ namespace MyGame.Models
         public int runFrames;
         public int attackFrames;
         public int deathFrames;
-
+        public int diamonds;
 
         public Player(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames, int deathFrames)
         {
@@ -42,6 +42,7 @@ namespace MyGame.Models
             this.attackFrames = attackFrames;
             this.deathFrames = deathFrames;
             currentFrame = 0;
+            diamonds = 0;
         }
 
         public void Move()
