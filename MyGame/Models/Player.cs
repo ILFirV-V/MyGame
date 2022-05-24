@@ -64,7 +64,7 @@ namespace MyGame.Models
             positionY += 4;
         }
 
-        public void changeAnimation(int currentAnimation)
+        public void ChangeAnimation(int currentAnimation)
         {
             this.currentAnimation = currentAnimation;
             switch (currentAnimation)

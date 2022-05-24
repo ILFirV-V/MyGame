@@ -71,8 +71,12 @@ namespace MyGame
         public void Update(object sender, EventArgs e)
         {
             player.Move();
-            twig.Move();
-            adventurer.Move();
+            twig.Fall();
+            if(twig.isMoving)
+                twig.Move();
+            adventurer.Fall();
+            if (adventurer.isMoving)
+                adventurer.Move();
             Invalidate();
         }
 

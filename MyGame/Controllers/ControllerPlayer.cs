@@ -25,13 +25,13 @@ namespace MyGame.Controllers
                     {
                         player.changeY = 0;
                         player.isMoving = false;
-                        player.changeAnimation(0);
+                        player.ChangeAnimation(0);
                     }
                     else
                     {
                         player.changeY = -2;
                         player.isMoving = true;
-                        player.changeAnimation(1);
+                        player.ChangeAnimation(1);
                     }
                     break;
                 case Keys.S:
@@ -39,32 +39,32 @@ namespace MyGame.Controllers
                     {
                         player.changeY = 0;
                         player.isMoving = false;
-                        player.changeAnimation(0);
+                        player.ChangeAnimation(0);
                     }
                     else
                     {
                         player.changeY = 2;
                         player.isMoving = true;
-                        player.changeAnimation(1);
+                        player.ChangeAnimation(1);
                     }
                     break;
                 case Keys.D:
                     player.changeX = 6;
                     player.isMoving = true;
                     player.direction = 1;
-                    player.changeAnimation(1);
+                    player.ChangeAnimation(1);
                     break;
                 case Keys.A:
                     player.changeX = -6;
                     player.isMoving = true;
                     player.direction = -1;
-                    player.changeAnimation(1);
+                    player.ChangeAnimation(1);
                     break;
                 case Keys.Space:
                     player.changeX = 0;
                     player.changeY = 0;
                     player.isMoving = false;
-                    player.changeAnimation(5);
+                    player.ChangeAnimation(5);
                     break;
             }
         }
@@ -74,7 +74,7 @@ namespace MyGame.Controllers
             player.changeX = 0;
             player.changeY = 0;
             player.isMoving = false;
-            player.changeAnimation(0);
+            player.ChangeAnimation(0);
         }
     }
 }
