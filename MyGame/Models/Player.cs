@@ -49,17 +49,19 @@ namespace MyGame.Models
 
         public void Move()
         {
-            positionX += changeX;
-            positionY += changeY;
+            if (isMoving)
+            {
+                positionX += changeX;
+                positionY += changeY;
+            }
+            Fall();
         }
 
         public void Fall()
         {
-            if (IsAir())
-            {
-                isMoving = false;
-                positionY += 4;
-            }
+            if (!IsAir()) return;
+            isMoving = false;
+            positionY += 4;
         }
 
         public void changeAnimation(int currentAnimation)

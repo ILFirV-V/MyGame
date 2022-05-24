@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MyGame.Models
 {
@@ -70,18 +71,20 @@ namespace MyGame.Models
 
         public void Move()
         {
-            if (IsSeePlayer(player.positionY) && isMoving)
-            {
-                positionX += 2;
-            }
-        }
-
-        public void Fall()
-        {
             if (IsAir())
             {
-                isMoving = false;
                 positionY += 2;
+                isMoving = false;
+            }
+            direction = player.positionX < positionX ? -1 : 1;
+            if (IsSeePlayer(player.positionY) && isMoving)
+            {
+                changeAnimation(1);
+                positionX += direction * 2;
+            }
+            else
+            {
+                changeAnimation(0);
             }
         }
 
@@ -105,6 +108,22 @@ namespace MyGame.Models
             if (Map.getMapPieceType(positionX / 30, changedPositionY + 1) == 1)
                 return true;
             return false;
+        }
+
+        public void AnimationChange()
+        {
+            direction = player.positionX < positionX ? -1 : 1;
+
+            if (IsSeePlayer(player.positionY))
+            {
+                isMoving = true;
+                changeAnimation(1);
+            }
+            else
+            {
+                isMoving = false;
+                changeAnimation(0);
+            }
         }
     }
 }

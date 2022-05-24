@@ -55,27 +55,23 @@ namespace MyGame
                 playerSheet = new Bitmap(Path.Combine(directoryInfoPlayer.Parent.FullName, "Sprites\\Player.png"));
             player = new Player(100, 100, playerSheet, 30, 1, 8, 4, 5);
 
-            var directoryInfoMinotaur = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
-            if (directoryInfoMinotaur != null)
-                twigSheet = new Bitmap(Path.Combine(directoryInfoMinotaur.Parent.FullName, "Sprites\\Twig.png"));
+            var directoryInfoTwig = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
+            if (directoryInfoTwig != null)
+                twigSheet = new Bitmap(Path.Combine(directoryInfoTwig.Parent.FullName, "Sprites\\Twig.png"));
             twig = new Enemy(100, 100, twigSheet, 30, 1, 8, 9, 6, player, 7);
 
             var directoryInfoShardsoul = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfoShardsoul != null)
                 adventurerSheet = new Bitmap(Path.Combine(directoryInfoShardsoul.Parent.FullName, "Sprites\\Adventurer.png"));
-            adventurer = new Enemy(100, 100, adventurerSheet, 35, 1, 8, 9, 6, player, 7);
+            adventurer = new Enemy(100, 100, adventurerSheet, 30, 1, 8, 9, 6, player, 7);
 
             timer1.Start();
         }
 
         public void Update(object sender, EventArgs e)
         {
-            if (player.isMoving)
-                player.Move();
-            player.Fall();
-            twig.Fall();
+            player.Move();
             twig.Move();
-            adventurer.Fall();
             adventurer.Move();
             Invalidate();
         }
