@@ -29,6 +29,7 @@ namespace MyGame.Models
         public int attackFrames;
         public int deathFrames;
         public int diamonds;
+        public int life;
 
         public Player(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames, int deathFrames)
         {
@@ -43,12 +44,22 @@ namespace MyGame.Models
             this.deathFrames = deathFrames;
             currentFrame = 0;
             diamonds = 0;
+            life = 5;
         }
 
         public void Move()
         {
             positionX += changeX;
             positionY += changeY;
+        }
+
+        public void Fall()
+        {
+            if (IsAir())
+            {
+                isMoving = false;
+                positionY += 4;
+            }
         }
 
         public void changeAnimation(int currentAnimation)
@@ -71,18 +82,30 @@ namespace MyGame.Models
             }
         }
 
-        public bool InConflict(int positionX, int positionY)
+        public bool InConflictStairsUp(int positionX, int positionY)
         {
-            if (Map.getMapPieceType(positionX / 30, positionY / 27) == 2)
+            var changedPositionY = (int)Math.Ceiling(positionY / 30.0);
+            if (Map.getMapPieceType(positionX / 30, changedPositionY) == 2)
             {
                 return false;
             }
             return true;
         }
 
-        public bool IsAir(int positionX, int positionY)
+        public bool InConflictStairsDown(int positionX, int positionY)
         {
-            if (Map.getMapPieceType(positionX / 30, positionY / 27) == 1)
+            var changedPositionY = (int)Math.Ceiling(positionY / 30.0);
+            if (Map.getMapPieceType(positionX / 30, changedPositionY + 1) == 2)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool IsAir()
+        {
+            var changedPositionY = (int)Math.Ceiling(positionY / 30.0);
+            if (Map.getMapPieceType(positionX / 30, changedPositionY + 1) == 1)
             {
                 return true;
             }

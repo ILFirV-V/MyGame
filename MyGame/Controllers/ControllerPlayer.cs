@@ -21,7 +21,7 @@ namespace MyGame.Controllers
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    if (player.InConflict(player.positionX, player.positionY - 65))
+                    if (player.InConflictStairsUp(player.positionX, player.positionY))
                     {
                         player.changeY = 0;
                         player.isMoving = false;
@@ -35,7 +35,7 @@ namespace MyGame.Controllers
                     }
                     break;
                 case Keys.S:
-                    if (player.InConflict(player.positionX, player.positionY - 54))
+                    if (player.InConflictStairsDown(player.positionX, player.positionY))
                     {
                         player.changeY = 0;
                         player.isMoving = false;

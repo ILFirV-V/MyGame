@@ -12,11 +12,9 @@ namespace MyGame.View
     {
         public static void EnemyAnimation(object sender, Graphics g, Enemy enemy)
         {
-            if (enemy.currentFrame < enemy.currentImageLimit - 1)
-                enemy.currentFrame += 2;
-            else 
-                enemy.currentFrame = 0;
-            g.DrawImage(enemy.spriteSheet, new Rectangle(new Point(enemy.positionX - enemy.direction * enemy.size / 2, enemy.positionY), new Size(enemy.direction * enemy.size * 2, enemy.size * 2)), 22 + 32 * enemy.currentFrame, 8 + 32 * enemy.currentAnimation, enemy.size, enemy.size, GraphicsUnit.Pixel);
+            g.DrawImage(enemy.spriteSheet, new Rectangle(new Point(enemy.positionX - enemy.direction * enemy.size / 2, enemy.positionY), 
+                new Size(enemy.direction * enemy.size * 2, enemy.size * 2)),enemy.currentFrame, 1 + enemy.currentAnimation, 
+                enemy.size, enemy.size, GraphicsUnit.Pixel);
         }
     }
 }

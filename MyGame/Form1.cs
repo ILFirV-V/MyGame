@@ -18,9 +18,11 @@ namespace MyGame
     public partial class Form1 : Form
     {
         public Image playerSheet;
-        public Image minotaurSheet;
         private Player player;
-        private Enemy minotaur;
+        public Image twigSheet;
+        private Enemy twig;
+        public Image adventurerSheet;
+        private Enemy adventurer;
         private ControllerPlayer controller;
 
         public Form1()
@@ -32,17 +34,16 @@ namespace MyGame
             controller = new ControllerPlayer(player);
             KeyDown += controller.OnPress;
             KeyUp += controller.OnKeyUp;
-            //timer2.Interval = 35;
-            //timer2.Tick += Update2;
-
+            Size = Screen.PrimaryScreen.Bounds.Size;
             WindowState = FormWindowState.Maximized;
             //FormBorderStyle = FormBorderStyle.None;
-            player.positionX = Right + 329;
-            player.positionY = Bottom - 24;
-            minotaur.positionX = Right;
-            minotaur.positionY = Bottom - 215;
+            player.positionX = 250;
+            player.positionY = ClientSize.Height - Map.mapConst * 6;
+            twig.positionX = ClientSize.Width - 250;
+            twig.positionY = ClientSize.Height - Map.mapConst * 12;
+            adventurer.positionX = 550;
+            adventurer.positionY = ClientSize.Height - Map.mapConst * 6;
             MaximizeBox = false;
-
         }
 
         public void Init()
@@ -56,8 +57,13 @@ namespace MyGame
 
             var directoryInfoMinotaur = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfoMinotaur != null)
-                minotaurSheet = new Bitmap(Path.Combine(directoryInfoMinotaur.Parent.FullName, "Sprites\\Minotaur.png"));
-            minotaur = new Enemy(100, 100, minotaurSheet, 60, 1, 8, 9, 6, player);
+                twigSheet = new Bitmap(Path.Combine(directoryInfoMinotaur.Parent.FullName, "Sprites\\Twig.png"));
+            twig = new Enemy(100, 100, twigSheet, 30, 1, 8, 9, 6, player, 7);
+
+            var directoryInfoShardsoul = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
+            if (directoryInfoShardsoul != null)
+                adventurerSheet = new Bitmap(Path.Combine(directoryInfoShardsoul.Parent.FullName, "Sprites\\Adventurer.png"));
+            adventurer = new Enemy(100, 100, adventurerSheet, 35, 1, 8, 9, 6, player, 7);
 
             timer1.Start();
         }
@@ -66,20 +72,20 @@ namespace MyGame
         {
             if (player.isMoving)
                 player.Move();
+            player.Fall();
+            twig.Fall();
+            twig.Move();
+            adventurer.Fall();
+            adventurer.Move();
             Invalidate();
         }
-
-        //public void Update2(object sender, EventArgs e)
-        //{
-        //    minotaur.Move();
-        //    Invalidate();
-        //}
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
             ViewMap.DrawMap(g);
-            ViewEnemy.EnemyAnimation(sender, g, minotaur);
+            ViewEnemy.EnemyAnimation(sender, g, twig);
+            ViewEnemy.EnemyAnimation(sender, g, adventurer);
             ViewPlayer.PlayerAnimation(sender, g, player);
         }
     }
