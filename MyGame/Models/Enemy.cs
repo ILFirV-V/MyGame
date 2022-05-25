@@ -18,6 +18,7 @@ namespace MyGame.Models
         public int direction;
 
         public bool isMoving;
+        public bool isAttack;
 
         public int size;
         public Image spriteSheet;
@@ -72,7 +73,11 @@ namespace MyGame.Models
         public void Move()
         {
             direction = player.positionX < positionX ? -1 : 1;
-            AttackPlayer();
+            if (AttackPlayer())
+            {
+                changeAnimation(3);
+                player.life--;
+            }
             if (life <= 0)
             {
                 isMoving = false;
@@ -118,20 +123,17 @@ namespace MyGame.Models
             return false;
         }
 
+        public bool AttackPlayer()
+        {
+            return player.positionX == positionX;
+        }
+
         public bool IsAir()
         {
             var changedPositionY = (int)Math.Ceiling(positionY / 30.0);
             if (Map.getMapPieceType(positionX / 30, changedPositionY + 1) == 1)
                 return true;
             return false;
-        }
-
-        public void AttackPlayer()
-        {
-            if (player.attackPower > 1)
-            {
-                life -= player.attackPower;
-            }
         }
     }
 }

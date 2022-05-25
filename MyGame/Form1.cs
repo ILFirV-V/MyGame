@@ -70,6 +70,7 @@ namespace MyGame
 
         public void Update(object sender, EventArgs e)
         {
+            //player.StateOnMap();
             player.Move();
             player.Jump();
             twig.Fall();

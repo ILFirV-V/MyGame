@@ -51,6 +51,15 @@ namespace MyGame.Models
             attackPower = 0;
         }
 
+        public void StateOnMap()
+        {
+            if (life <= 0)
+            {
+                ChangeAnimation(6);
+                isMoving = false;
+            }
+        }
+
         public void Move()
         {
             if (isMoving)
