@@ -78,7 +78,15 @@ namespace MyGame.Controllers
                         player.ChangeAnimation(1);
                     }
                     break;
-                case Keys.Space:
+                case Keys.Q:
+                    player.changeX = -5;
+                    player.changeY = -5;
+                    player.isJump = true;
+                    player.direction = -1;
+                    player.jumpLevel = 0;
+                    player.ChangeAnimation(0);
+                    break;
+                case Keys.Enter:
                     player.changeX = 0;
                     player.changeY = 0;
                     player.isMoving = false;
@@ -93,6 +101,7 @@ namespace MyGame.Controllers
             player.changeX = 0;
             player.changeY = 0;
             player.isMoving = false;
+            player.isJump = false;
             player.ChangeAnimation(0);
         }
     }

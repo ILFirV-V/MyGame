@@ -71,6 +71,7 @@ namespace MyGame
         public void Update(object sender, EventArgs e)
         {
             player.Move();
+            player.Jump();
             twig.Fall();
             if(twig.isMoving)
                 twig.Move();
@@ -83,7 +84,7 @@ namespace MyGame
         private void OnPaint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
-            ViewMap.DrawMap(g);
+            ViewMap.DrawMap(g, player);
             ViewEnemy.EnemyAnimation(sender, g, twig);
             ViewEnemy.EnemyAnimation(sender, g, adventurer);
             ViewPlayer.PlayerAnimation(sender, g, player);

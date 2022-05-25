@@ -17,6 +17,7 @@ namespace MyGame.Models
         public int direction;
 
         public bool isMoving;
+        public bool isJump = false;
 
         public int size;
         public Image spriteSheet;
@@ -31,6 +32,7 @@ namespace MyGame.Models
         public int diamonds;
         public int life;
         public int attackPower;
+        public int jumpLevel = - 1;
 
         public Player(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames, int deathFrames)
         {
@@ -57,6 +59,28 @@ namespace MyGame.Models
                 positionY += changeY;
             }
             Fall();
+        }
+
+        public void Jump()
+        {
+            if (isJump && jumpLevel == 0)
+            {
+                positionX += 5;
+                positionY += 5;
+                jumpLevel = 1;
+            }
+            else if (isJump && jumpLevel == 1)
+            {
+                positionX += 0;
+                positionY += 0;
+                jumpLevel = 2;
+            }
+            else if (isJump && jumpLevel == 2)
+            {
+                positionX -= 5;
+                positionY -= 5;
+                jumpLevel = 0;
+            }
         }
 
         public void Fall()
@@ -110,7 +134,7 @@ namespace MyGame.Models
 
         public bool InConflictLeft(int positionX, int positionY)
         {
-            var changedPositionX = (int)Math.Floor(positionX / 30.0) != 0 ? (int)Math.Floor(positionX / 30.0) : 1;
+            var changedPositionX = (int)Math.Floor(positionX/ 30.0) != 0 ? (int)Math.Floor(positionX / 30.0) : 1;
             var changedPositionY = (int)Math.Ceiling((positionY + 20) / 30.0);
             if (Map.getMapPieceType(changedPositionX - 1, positionY / 30) == 15
                 || (Map.getMapPieceType(changedPositionX - 1, changedPositionY) == 4 && Map.getMapPieceType(changedPositionX - 1, changedPositionY) == 4))

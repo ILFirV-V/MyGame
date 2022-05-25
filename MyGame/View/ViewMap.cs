@@ -11,8 +11,9 @@ namespace MyGame.View
 {
     class ViewMap
     {
-        public static void DrawMap(Graphics g)
+        public static void DrawMap(Graphics g, Player player)
         {
+            var a = 0;
             for (var i = 0; i < Map.mapWidth ;  i++)
             {
                 for (var j = 0; j < Map.mapHeight; j++)
@@ -65,16 +66,32 @@ namespace MyGame.View
                             PaintMap(g, i, j, 320, 140);
                             PaintMap(g, i, j, 120, 120);
                             break;
-                        case 13:
-                            PaintMap(g, i, j, 320, 140);
-                            PaintMap(g, i, j, 80, 40);
-                            break;
                         case 14:
                             PaintMap(g, i, j, 320, 140);
                             PaintMap(g, i, j, 200, 160);
                             break;
                         case 15:
                             PaintMap(g, i, j, 320, 140);
+                            break;
+                        case 20:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, player.life >= 1 ? 80 : 120, 40);
+                            break;
+                        case 21:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, player.life >= 2 ? 80 : 120, 40);
+                            break;
+                        case 22:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, player.life >= 3 ? 80 : 120, 40);
+                            break;
+                        case 23:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, player.life >= 4 ? 80 : 120, 40);
+                            break;
+                        case 24:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, player.life >= 5 ? 80 : 120, 40);
                             break;
                     }
                 }
