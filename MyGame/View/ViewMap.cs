@@ -75,23 +75,28 @@ namespace MyGame.View
                             break;
                         case 20:
                             PaintMap(g, i, j, 320, 140);
-                            PaintMap(g, i, j, player.life >= 1 ? 80 : 120, 40);
+                            PaintMap(g, i, j, player.XP >= 25 ? 100 : 120, 40);
+                            PaintMap(g, i, j, player.XP >= 50 ? 80 : 120, 40);
                             break;
                         case 21:
                             PaintMap(g, i, j, 320, 140);
-                            PaintMap(g, i, j, player.life >= 2 ? 80 : 120, 40);
+                            PaintMap(g, i, j, player.XP >= 75 ? 100 : 120, 40);
+                            PaintMap(g, i, j, player.XP >= 100 ? 80 : 120, 40);
                             break;
                         case 22:
                             PaintMap(g, i, j, 320, 140);
-                            PaintMap(g, i, j, player.life >= 3 ? 80 : 120, 40);
+                            PaintMap(g, i, j, player.XP >= 125 ? 100 : 120, 40);
+                            PaintMap(g, i, j, player.XP >= 150 ? 80 : 120, 40);
                             break;
                         case 23:
                             PaintMap(g, i, j, 320, 140);
-                            PaintMap(g, i, j, player.life >= 4 ? 80 : 120, 40);
+                            PaintMap(g, i, j, player.XP >= 175 ? 100 : 120, 40);
+                            PaintMap(g, i, j, player.XP >= 200 ? 80 : 120, 40);
                             break;
                         case 24:
                             PaintMap(g, i, j, 320, 140);
-                            PaintMap(g, i, j, player.life >= 5 ? 80 : 120, 40);
+                            PaintMap(g, i, j, player.XP >= 225 ? 100 : 120, 40);
+                            PaintMap(g, i, j, player.XP >= 250 ? 80 : 120, 40);
                             break;
                     }
                 }

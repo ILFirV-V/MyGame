@@ -21,7 +21,7 @@ namespace MyGame.Controllers
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    if (player.InConflictStairsUp(player.positionX, player.positionY))
+                    if (GameControllers.InConflictStairsUp(player.positionX, player.positionY))
                     {
                         player.changeY = 0;
                         player.isMoving = false;
@@ -35,7 +35,7 @@ namespace MyGame.Controllers
                     }
                     break;
                 case Keys.S:
-                    if (player.InConflictStairsDown(player.positionX, player.positionY))
+                    if (GameControllers.InConflictStairsDown(player.positionX, player.positionY))
                     {
                         player.changeY = 0;
                         player.isMoving = false;
@@ -49,7 +49,8 @@ namespace MyGame.Controllers
                     }
                     break;
                 case Keys.D:
-                    if (player.InConflictRight(player.positionX, player.positionY))
+                    player.direction = 1;
+                    if (GameControllers.InConflictLeftAndRight(player.positionX, player.positionY, player.direction))
                     {
                         player.changeX = 0;
                         player.isMoving = false;
@@ -59,12 +60,12 @@ namespace MyGame.Controllers
                     {
                         player.changeX = 4;
                         player.isMoving = true;
-                        player.direction = 1;
                         player.ChangeAnimation(1);
                     }
                     break;
                 case Keys.A:
-                    if (player.InConflictLeft(player.positionX, player.positionY))
+                    player.direction = -1;
+                    if (GameControllers.InConflictLeftAndRight(player.positionX, player.positionY, player.direction))
                     {
                         player.changeX = 0;
                         player.isMoving = false;
@@ -74,7 +75,6 @@ namespace MyGame.Controllers
                     {
                         player.changeX = -4;
                         player.isMoving = true;
-                        player.direction = -1;
                         player.ChangeAnimation(1);
                     }
                     break;

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MyGame.Controllers;
 
 namespace MyGame.Models
 {
@@ -33,8 +34,15 @@ namespace MyGame.Models
 
         public int life;
 
+        public int locationIdleFrames;
+        public int locationRunFrames;
+        public int locationAttackFrames;
+        public int locationDeathFrames;
+
+        public bool characterDied = false;
+
         public Enemy(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames,
-            int deathFrames, Player player, int life)
+            int deathFrames, Player player, int life, int locationIdleFrames, int locationRunFrames, int locationAttackFrames, int locationDeathFrames)
         {
             positionX = posX;
             positionY = posY;
@@ -48,57 +56,60 @@ namespace MyGame.Models
             currentFrame = 0;
             this.player = player;
             this.life = life;
+            this.locationIdleFrames = locationIdleFrames;
+            this.locationRunFrames = locationRunFrames;
+            this.locationAttackFrames = locationAttackFrames;
+            this.locationDeathFrames = locationDeathFrames;
         }
 
-        public void changeAnimation(int currentAnimation)
+        public void ChangeAnimation(int currentAnimation)
         {
             this.currentAnimation = currentAnimation;
-            switch (currentAnimation)
-            {
-                case 0:
-                    currentImageLimit = idleFrames;
-                    break;
-                case 1:
-                    currentImageLimit = runFrames;
-                    break;
-                case 3:
-                    currentImageLimit = attackFrames;
-                    break;
-                case 4:
-                    currentImageLimit = deathFrames;
-                    break;
-            }
+            if (currentAnimation == locationIdleFrames)
+                currentImageLimit = idleFrames;
+            else if (currentAnimation == locationRunFrames)
+                currentImageLimit = runFrames;
+            else if (currentAnimation == locationAttackFrames)
+                currentImageLimit = attackFrames;
+            else if (currentAnimation == locationDeathFrames)
+                currentImageLimit = deathFrames;
         }
 
         public void Move()
         {
             direction = player.positionX < positionX ? -1 : 1;
-            if (AttackPlayer())
-            {
-                changeAnimation(3);
-                player.life--;
-            }
-            if (life <= 0)
-            {
-                isMoving = false;
-                changeAnimation(4);
-            }
-            if (IsSeePlayer(player.positionY))
+            if (IsSeePlayer(player.positionY) && !AttackPlayer())
             {
                 isMoving = true;
-                changeAnimation(1);
+                ChangeAnimation(locationRunFrames);
                 positionX += direction * 2;
             }
             else
             {
                 isMoving = false;
-                changeAnimation(0);
+                ChangeAnimation(locationIdleFrames);
+            }
+        }
+
+        public void Attack()
+        {
+            direction = player.positionX < positionX ? -1 : 1;
+            if (AttackPlayer())
+            {
+                ChangeAnimation(locationAttackFrames);
+                player.XP--;
+            }
+
+            if (life <= 0)
+            {
+                isMoving = false;
+                ChangeAnimation(locationDeathFrames);
             }
         }
 
         public void Fall()
         {
-            if (IsAir())
+            if (GameControllers.EssenceInAir(positionX, positionY))
             {
                 positionY += 2;
                 isMoving = false;
@@ -125,15 +136,7 @@ namespace MyGame.Models
 
         public bool AttackPlayer()
         {
-            return player.positionX == positionX;
-        }
-
-        public bool IsAir()
-        {
-            var changedPositionY = (int)Math.Ceiling(positionY / 30.0);
-            if (Map.getMapPieceType(positionX / 30, changedPositionY + 1) == 1)
-                return true;
-            return false;
+            return player.positionX - direction * 40 == positionX && IsSeePlayer(player.positionY);
         }
     }
 }

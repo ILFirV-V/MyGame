@@ -4,11 +4,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyGame.Controllers;
 
 namespace MyGame.Models
 {
     class Player
     {
+        public int size;
+        public Image spriteSheet;
+
         public int positionX;
         public int positionY;
         public int changeX;
@@ -19,9 +23,6 @@ namespace MyGame.Models
         public bool isMoving;
         public bool isJump = false;
 
-        public int size;
-        public Image spriteSheet;
-
         public int currentAnimation;
         public int currentImageLimit;
         public int currentFrame;
@@ -29,10 +30,13 @@ namespace MyGame.Models
         public int runFrames;
         public int attackFrames;
         public int deathFrames;
-        public int diamonds;
-        public int life;
+
+        public int diamondsCount;
+        public int XP;
         public int attackPower;
-        public int jumpLevel = - 1;
+        public int jumpLevel = -1;
+
+        public bool characterDied = false;
 
         public Player(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames, int deathFrames)
         {
@@ -45,24 +49,46 @@ namespace MyGame.Models
             this.runFrames = runFrames;
             this.attackFrames = attackFrames;
             this.deathFrames = deathFrames;
+
+
             currentFrame = 0;
-            diamonds = 0;
-            life = 5;
+            diamondsCount = 0;
+            XP = 250;
             attackPower = 0;
+        }
+
+        public void ChangeAnimation(int currentAnimation)
+        {
+            this.currentAnimation = currentAnimation;
+            switch (currentAnimation)
+            {
+                case 0:
+                    currentImageLimit = idleFrames;
+                    break;
+                case 1:
+                    currentImageLimit = runFrames;
+                    break;
+                case 5:
+                    currentImageLimit = attackFrames;
+                    break;
+                case 6:
+                    currentImageLimit = deathFrames;
+                    break;
+            }
         }
 
         public void StateOnMap()
         {
-            if (life <= 0)
+            if (XP <= 0)
             {
                 ChangeAnimation(6);
-                isMoving = false;
+                characterDied = true;
             }
         }
 
         public void Move()
         {
-            if (isMoving)
+            if (isMoving && !characterDied)
             {
                 positionX += changeX;
                 positionY += changeY;
@@ -94,84 +120,11 @@ namespace MyGame.Models
 
         public void Fall()
         {
-            if (IsAir())
+            if (GameControllers.EssenceInAir(positionX, positionY))
             {
                 isMoving = false;
                 positionY += 4;
             }
-        }
-
-        public void ChangeAnimation(int currentAnimation)
-        {
-            this.currentAnimation = currentAnimation;
-            switch (currentAnimation)
-            {
-                case 0:
-                    currentImageLimit = idleFrames;
-                    break;
-                case 1:
-                    currentImageLimit = runFrames;
-                    break;
-                case 5:
-                    currentImageLimit = attackFrames;
-                    break;
-                case 6:
-                    currentImageLimit = deathFrames;
-                    break;
-            }
-        }
-
-        public bool InConflictStairsUp(int positionX, int positionY)
-        {
-            var changedPositionY = (int)Math.Ceiling(positionY / 30.0);
-            if (Map.getMapPieceType(positionX / 30, changedPositionY) == 2)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public bool InConflictStairsDown(int positionX, int positionY)
-        {
-            var changedPositionY = (int)Math.Ceiling(positionY / 30.0);
-            if (Map.getMapPieceType(positionX / 30, changedPositionY + 1) == 2)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public bool InConflictLeft(int positionX, int positionY)
-        {
-            var changedPositionX = (int)Math.Floor(positionX/ 30.0) != 0 ? (int)Math.Floor(positionX / 30.0) : 1;
-            var changedPositionY = (int)Math.Ceiling((positionY + 20) / 30.0);
-            if (Map.getMapPieceType(changedPositionX - 1, positionY / 30) == 15
-                || (Map.getMapPieceType(changedPositionX - 1, changedPositionY) == 4 && Map.getMapPieceType(changedPositionX - 1, changedPositionY) == 4))
-            {
-                return true;
-            }
-            return false;
-        }
-        public bool InConflictRight(int positionX, int positionY)
-        {
-            var changedPositionX = (int)Math.Floor(positionX / 30.0) != 51 ? (int)Math.Floor(positionX / 30.0) : 50;
-            var changedPositionY = (int)Math.Ceiling((positionY + 20) / 30.0);
-            if (Map.getMapPieceType(changedPositionX + 1, positionY / 30) == 15 
-                ||Map.getMapPieceType(changedPositionX + 1, changedPositionY) == 4)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public bool IsAir()
-        {
-            var changedPositionY = (int)Math.Ceiling(positionY / 30.0);
-            if (Map.getMapPieceType(positionX / 30, changedPositionY + 1) == 1)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

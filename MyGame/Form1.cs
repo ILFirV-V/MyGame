@@ -19,8 +19,8 @@ namespace MyGame
     {
         public Image playerSheet;
         private Player player;
-        public Image twigSheet;
-        private Enemy twig;
+        public Image leshySheet;
+        private Enemy leshy;
         public Image adventurerSheet;
         private Enemy adventurer;
         private ControllerPlayer controller;
@@ -29,7 +29,10 @@ namespace MyGame
         {
             InitializeComponent();
             timer1.Interval = 30;
-            timer1.Tick += Update;
+            timer1.Tick += UpdatePlayer;
+            timer2.Interval = 35;
+            timer2.Tick += UpdateEnemy;
+            timer2.Tick += UpdateEnemyAttack;
             Init();
             controller = new ControllerPlayer(player);
             KeyDown += controller.OnPress;
@@ -39,10 +42,10 @@ namespace MyGame
             //FormBorderStyle = FormBorderStyle.None;
             player.positionX = 250;
             player.positionY = ClientSize.Height - Map.mapConst * 6;
-            twig.positionX = ClientSize.Width - 250;
-            twig.positionY = ClientSize.Height - Map.mapConst * 12;
+            leshy.positionX = 350;
+            leshy.positionY = ClientSize.Height - Map.mapConst * 6;
             adventurer.positionX = 550;
-            adventurer.positionY = ClientSize.Height - Map.mapConst * 6;
+            adventurer.positionY = ClientSize.Height - Map.mapConst * 12; 
             MaximizeBox = false;
         }
 
@@ -53,29 +56,40 @@ namespace MyGame
             var directoryInfoPlayer = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfoPlayer != null)
                 playerSheet = new Bitmap(Path.Combine(directoryInfoPlayer.Parent.FullName, "Sprites\\Player.png"));
-            player = new Player(100, 100, playerSheet, 30, 1, 8, 4, 5);
+            player = new Player(100, 100, playerSheet, 35, 1, 8, 4, 5);
 
-            var directoryInfoTwig = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
-            if (directoryInfoTwig != null)
-                twigSheet = new Bitmap(Path.Combine(directoryInfoTwig.Parent.FullName, "Sprites\\Twig.png"));
-            twig = new Enemy(100, 100, twigSheet, 30, 1, 8, 9, 6, player, 3);
+            var directoryInfoLeshy = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
+            if (directoryInfoLeshy != null)
+                leshySheet = new Bitmap(Path.Combine(directoryInfoLeshy.Parent.FullName, "Sprites\\Leshy.png"));
+            leshy = new Enemy(100, 100, leshySheet, 35, 1, 8, 6, 6, player, 50, 0, 1, 2, 4);
 
             var directoryInfoShardsoul = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfoShardsoul != null)
                 adventurerSheet = new Bitmap(Path.Combine(directoryInfoShardsoul.Parent.FullName, "Sprites\\Adventurer.png"));
-            adventurer = new Enemy(100, 100, adventurerSheet, 30, 1, 8, 9, 6, player, 7);
-
+            adventurer = new Enemy(100, 100, adventurerSheet, 35, 1, 8, 6, 6, player, 100, 0, 1, 6, 5);
+            timer2.Start();
             timer1.Start();
         }
 
-        public void Update(object sender, EventArgs e)
+        public void UpdatePlayer(object sender, EventArgs e)
         {
-            //player.StateOnMap();
+
             player.Move();
             player.Jump();
-            twig.Fall();
-            if(twig.isMoving)
-                twig.Move();
+            player.StateOnMap();
+        }
+
+        public void UpdateEnemyAttack(object sender, EventArgs e)
+        {
+            adventurer.Attack();
+            leshy.Attack();
+        }
+
+        public void UpdateEnemy(object sender, EventArgs e)
+        {
+            leshy.Fall();
+            if (leshy.isMoving)
+                leshy.Move();
             adventurer.Fall();
             if (adventurer.isMoving)
                 adventurer.Move();
@@ -86,7 +100,7 @@ namespace MyGame
         {
             var g = e.Graphics;
             ViewMap.DrawMap(g, player);
-            ViewEnemy.EnemyAnimation(sender, g, twig);
+            ViewEnemy.EnemyAnimation(sender, g, leshy);
             ViewEnemy.EnemyAnimation(sender, g, adventurer);
             ViewPlayer.PlayerAnimation(sender, g, player);
         }
