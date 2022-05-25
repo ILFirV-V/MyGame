@@ -73,6 +73,9 @@ namespace MyGame.View
                             PaintMap(g, i, j, 320, 140);
                             PaintMap(g, i, j, 200, 160);
                             break;
+                        case 15:
+                            PaintMap(g, i, j, 320, 140);
+                            break;
                     }
                 }
             }

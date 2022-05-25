@@ -49,22 +49,41 @@ namespace MyGame.Controllers
                     }
                     break;
                 case Keys.D:
-                    player.changeX = 6;
-                    player.isMoving = true;
-                    player.direction = 1;
-                    player.ChangeAnimation(1);
+                    if (player.InConflictRight(player.positionX, player.positionY))
+                    {
+                        player.changeX = 0;
+                        player.isMoving = false;
+                        player.ChangeAnimation(0);
+                    }
+                    else
+                    {
+                        player.changeX = 4;
+                        player.isMoving = true;
+                        player.direction = 1;
+                        player.ChangeAnimation(1);
+                    }
                     break;
                 case Keys.A:
-                    player.changeX = -6;
-                    player.isMoving = true;
-                    player.direction = -1;
-                    player.ChangeAnimation(1);
+                    if (player.InConflictLeft(player.positionX, player.positionY))
+                    {
+                        player.changeX = 0;
+                        player.isMoving = false;
+                        player.ChangeAnimation(0);
+                    }
+                    else
+                    {
+                        player.changeX = -4;
+                        player.isMoving = true;
+                        player.direction = -1;
+                        player.ChangeAnimation(1);
+                    }
                     break;
                 case Keys.Space:
                     player.changeX = 0;
                     player.changeY = 0;
                     player.isMoving = false;
                     player.ChangeAnimation(5);
+                    player.attackPower += 1;
                     break;
             }
         }

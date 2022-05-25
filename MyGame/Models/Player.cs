@@ -30,6 +30,7 @@ namespace MyGame.Models
         public int deathFrames;
         public int diamonds;
         public int life;
+        public int attackPower;
 
         public Player(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames, int deathFrames)
         {
@@ -45,6 +46,7 @@ namespace MyGame.Models
             currentFrame = 0;
             diamonds = 0;
             life = 5;
+            attackPower = 0;
         }
 
         public void Move()
@@ -59,9 +61,11 @@ namespace MyGame.Models
 
         public void Fall()
         {
-            if (!IsAir()) return;
-            isMoving = false;
-            positionY += 4;
+            if (IsAir())
+            {
+                isMoving = false;
+                positionY += 4;
+            }
         }
 
         public void ChangeAnimation(int currentAnimation)
@@ -102,6 +106,29 @@ namespace MyGame.Models
                 return false;
             }
             return true;
+        }
+
+        public bool InConflictLeft(int positionX, int positionY)
+        {
+            var changedPositionX = (int)Math.Floor(positionX / 30.0) != 0 ? (int)Math.Floor(positionX / 30.0) : 1;
+            var changedPositionY = (int)Math.Ceiling((positionY + 20) / 30.0);
+            if (Map.getMapPieceType(changedPositionX - 1, positionY / 30) == 15
+                || (Map.getMapPieceType(changedPositionX - 1, changedPositionY) == 4 && Map.getMapPieceType(changedPositionX - 1, changedPositionY) == 4))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool InConflictRight(int positionX, int positionY)
+        {
+            var changedPositionX = (int)Math.Floor(positionX / 30.0) != 51 ? (int)Math.Floor(positionX / 30.0) : 50;
+            var changedPositionY = (int)Math.Ceiling((positionY + 20) / 30.0);
+            if (Map.getMapPieceType(changedPositionX + 1, positionY / 30) == 15 
+                ||Map.getMapPieceType(changedPositionX + 1, changedPositionY) == 4)
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool IsAir()

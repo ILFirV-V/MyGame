@@ -58,7 +58,7 @@ namespace MyGame
             var directoryInfoTwig = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfoTwig != null)
                 twigSheet = new Bitmap(Path.Combine(directoryInfoTwig.Parent.FullName, "Sprites\\Twig.png"));
-            twig = new Enemy(100, 100, twigSheet, 30, 1, 8, 9, 6, player, 7);
+            twig = new Enemy(100, 100, twigSheet, 30, 1, 8, 9, 6, player, 3);
 
             var directoryInfoShardsoul = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfoShardsoul != null)

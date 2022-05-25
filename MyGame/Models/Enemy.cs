@@ -63,7 +63,7 @@ namespace MyGame.Models
                 case 3:
                     currentImageLimit = attackFrames;
                     break;
-                case 9:
+                case 4:
                     currentImageLimit = deathFrames;
                     break;
             }
@@ -72,6 +72,12 @@ namespace MyGame.Models
         public void Move()
         {
             direction = player.positionX < positionX ? -1 : 1;
+            AttackPlayer();
+            if (life <= 0)
+            {
+                isMoving = false;
+                changeAnimation(4);
+            }
             if (IsSeePlayer(player.positionY))
             {
                 isMoving = true;
@@ -118,6 +124,14 @@ namespace MyGame.Models
             if (Map.getMapPieceType(positionX / 30, changedPositionY + 1) == 1)
                 return true;
             return false;
+        }
+
+        public void AttackPlayer()
+        {
+            if (player.attackPower > 1)
+            {
+                life -= player.attackPower;
+            }
         }
     }
 }
