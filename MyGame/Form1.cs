@@ -31,8 +31,9 @@ namespace MyGame
             timer1.Interval = 30;
             timer1.Tick += UpdatePlayer;
             timer2.Interval = 35;
+            timer2.Tick += UpdateEnemyBattle;
             timer2.Tick += UpdateEnemy;
-            timer2.Tick += UpdateEnemyAttack;
+
             Init();
             controller = new ControllerPlayer(player);
             KeyDown += controller.OnPress;
@@ -69,20 +70,27 @@ namespace MyGame
             adventurer = new Enemy(100, 100, adventurerSheet, 35, 1, 8, 6, 6, player, 100, 0, 1, 6, 5);
             timer2.Start();
             timer1.Start();
+
         }
 
         public void UpdatePlayer(object sender, EventArgs e)
         {
-
             player.Move();
-            player.Jump();
+            player.Jump1();
             player.StateOnMap();
         }
 
-        public void UpdateEnemyAttack(object sender, EventArgs e)
+        public void UpdatePlayerJump(object sender, EventArgs e)
         {
-            adventurer.Attack();
-            leshy.Attack();
+
+            if(player.isJump)
+                player.Jump1();
+        }
+
+        public void UpdateEnemyBattle(object sender, EventArgs e)
+        {
+            leshy.Battle();
+            adventurer.Battle();
         }
 
         public void UpdateEnemy(object sender, EventArgs e)
@@ -93,6 +101,8 @@ namespace MyGame
             adventurer.Fall();
             if (adventurer.isMoving)
                 adventurer.Move();
+            leshy.Battle();
+            adventurer.Battle();
             Invalidate();
         }
 
@@ -100,9 +110,9 @@ namespace MyGame
         {
             var g = e.Graphics;
             ViewMap.DrawMap(g, player);
+            ViewPlayer.PlayerAnimation(sender, g, player);
             ViewEnemy.EnemyAnimation(sender, g, leshy);
             ViewEnemy.EnemyAnimation(sender, g, adventurer);
-            ViewPlayer.PlayerAnimation(sender, g, player);
         }
     }
 }

@@ -77,32 +77,40 @@ namespace MyGame.Models
 
         public void Move()
         {
+            if (characterDied)
+                return;
             direction = player.positionX < positionX ? -1 : 1;
-            if (IsSeePlayer(player.positionY) && !AttackPlayer())
+            if (IsSeePlayer() && !AttackPlayer())
             {
-                isMoving = true;
                 ChangeAnimation(locationRunFrames);
                 positionX += direction * 2;
             }
             else
             {
-                isMoving = false;
                 ChangeAnimation(locationIdleFrames);
             }
         }
 
-        public void Attack()
+        public void Battle()
         {
             direction = player.positionX < positionX ? -1 : 1;
-            if (AttackPlayer())
+            if (AttackPlayer() && !characterDied && !player.characterDied)
             {
                 ChangeAnimation(locationAttackFrames);
                 player.XP--;
             }
 
+            if (PlayerAttackMe())
+            {
+                life -= player.weapon.damage;
+                player.weapon.cartridgesCount -= 2;
+            }
+
             if (life <= 0)
             {
                 isMoving = false;
+                characterDied = true;
+                isAttack = false;
                 ChangeAnimation(locationDeathFrames);
             }
         }
@@ -120,12 +128,12 @@ namespace MyGame.Models
             }
         }
 
-        public bool IsSeePlayer(int positionPlayerY)
+        public bool IsSeePlayer()
         {
             var posY = positionY - 16;
             for (var i = 1; i <= 32; i++)
             {
-                if (positionPlayerY == posY + i)
+                if (player.positionY == posY + i)
                 {
                     isMoving = true;
                     return true;
@@ -136,7 +144,12 @@ namespace MyGame.Models
 
         public bool AttackPlayer()
         {
-            return player.positionX - direction * 40 == positionX && IsSeePlayer(player.positionY);
+            return player.positionX - direction * 20 == positionX && IsSeePlayer();
+        }
+
+        public bool PlayerAttackMe()
+        {
+            return IsSeePlayer() && player.isAttack;
         }
     }
 }

@@ -21,6 +21,8 @@ namespace MyGame.Controllers
             switch (e.KeyCode)
             {
                 case Keys.W:
+                    if (player.characterDied)
+                        break;
                     if (GameControllers.InConflictStairsUp(player.positionX, player.positionY))
                     {
                         player.changeY = 0;
@@ -35,6 +37,8 @@ namespace MyGame.Controllers
                     }
                     break;
                 case Keys.S:
+                    if (player.characterDied)
+                        break;
                     if (GameControllers.InConflictStairsDown(player.positionX, player.positionY))
                     {
                         player.changeY = 0;
@@ -49,6 +53,8 @@ namespace MyGame.Controllers
                     }
                     break;
                 case Keys.D:
+                    if (player.characterDied)
+                        break;
                     player.direction = 1;
                     if (GameControllers.InConflictLeftAndRight(player.positionX, player.positionY, player.direction))
                     {
@@ -64,6 +70,8 @@ namespace MyGame.Controllers
                     }
                     break;
                 case Keys.A:
+                    if (player.characterDied)
+                        break;
                     player.direction = -1;
                     if (GameControllers.InConflictLeftAndRight(player.positionX, player.positionY, player.direction))
                     {
@@ -79,19 +87,26 @@ namespace MyGame.Controllers
                     }
                     break;
                 case Keys.Q:
-                    player.changeX = -5;
-                    player.changeY = -5;
-                    player.isJump = true;
+                    if (player.characterDied)
+                        break;
                     player.direction = -1;
-                    player.jumpLevel = 0;
                     player.ChangeAnimation(0);
+                    player.isJump = true;
+                    break;
+                case Keys.E:
+                    if (player.characterDied)
+                        break;
+                    player.direction = 1;
+                    player.ChangeAnimation(0);
+                    player.isJump = true;
                     break;
                 case Keys.Enter:
+                    if (player.characterDied)
+                        break;
+                    player.isAttack = true;
                     player.changeX = 0;
                     player.changeY = 0;
-                    player.isMoving = false;
                     player.ChangeAnimation(5);
-                    player.attackPower += 1;
                     break;
             }
         }
@@ -101,8 +116,9 @@ namespace MyGame.Controllers
             player.changeX = 0;
             player.changeY = 0;
             player.isMoving = false;
-            player.isJump = false;
-            player.ChangeAnimation(0);
+            player.isAttack = false;
+            player.jumpLevel = 0;
+            player.ChangeAnimation(player.characterDied ? 10 : 0);
         }
     }
 }

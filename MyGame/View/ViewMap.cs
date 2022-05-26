@@ -52,7 +52,8 @@ namespace MyGame.View
                             break;
                         case 9:
                             PaintMap(g, i, j, 320, 140);
-                            PaintMap(g, i, j, 140, 60);
+                            if ((player.isCollectsDiamond() && !player.collectedDiamonds.Contains((i, j))) || player.collectedDiamonds == null)
+                                PaintMap(g, i, j, 140, 60);
                             break;
                         case 10:
                             PaintMap(g, i, j, 320, 140);
@@ -72,6 +73,10 @@ namespace MyGame.View
                             break;
                         case 15:
                             PaintMap(g, i, j, 320, 140);
+                            break;
+                        case 16:
+                            PaintMap(g, i, j, 320, 140);
+                            PaintMap(g, i, j, 140, 60);
                             break;
                         case 20:
                             PaintMap(g, i, j, 320, 140);

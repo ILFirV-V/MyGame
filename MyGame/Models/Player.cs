@@ -21,7 +21,8 @@ namespace MyGame.Models
         public int direction;
 
         public bool isMoving;
-        public bool isJump = false;
+        public bool isJump;
+        public bool isAttack;
 
         public int currentAnimation;
         public int currentImageLimit;
@@ -35,10 +36,14 @@ namespace MyGame.Models
         public int XP;
         public int attackPower;
         public int jumpLevel = -1;
+        public int diamonds;
 
-        public bool characterDied = false;
+        public bool characterDied;
+        public Weapon weapon;
+        public List<(int, int)> collectedDiamonds;
 
-        public Player(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames, int deathFrames)
+        public Player(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames,
+            int deathFrames)
         {
             positionX = posX;
             positionY = posY;
@@ -55,6 +60,8 @@ namespace MyGame.Models
             diamondsCount = 0;
             XP = 250;
             attackPower = 0;
+            weapon = new Weapon(2, 20);
+            collectedDiamonds = new List<(int, int)>();
         }
 
         public void ChangeAnimation(int currentAnimation)
@@ -83,6 +90,9 @@ namespace MyGame.Models
             {
                 ChangeAnimation(6);
                 characterDied = true;
+                isMoving = false;
+                isJump = false;
+                isAttack = false;
             }
         }
 
@@ -93,38 +103,46 @@ namespace MyGame.Models
                 positionX += changeX;
                 positionY += changeY;
             }
+
             Fall();
         }
 
-        public void Jump()
+        public void Jump1()
         {
             if (isJump && jumpLevel == 0)
             {
-                positionX += 5;
-                positionY += 5;
+                positionX += direction * 20;
+                positionY -= 20;
                 jumpLevel = 1;
+                isJump = false;
             }
-            else if (isJump && jumpLevel == 1)
-            {
-                positionX += 0;
-                positionY += 0;
-                jumpLevel = 2;
-            }
-            else if (isJump && jumpLevel == 2)
-            {
-                positionX -= 5;
-                positionY -= 5;
-                jumpLevel = 0;
-            }
+        }
+
+        public void Attack()
+        {
+
+            isAttack = false;
         }
 
         public void Fall()
         {
-            if (GameControllers.EssenceInAir(positionX, positionY))
+            if (GameControllers.EssenceInAir(positionX, positionY) && !isJump)
             {
                 isMoving = false;
                 positionY += 4;
             }
+        }
+
+        public bool isCollectsDiamond()
+        {
+            var changedPositionY = (int) Math.Ceiling((positionY + 25) / 30.0);
+            var changedPositionX = (int) Math.Floor(positionX / 30.0);
+            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 9)
+            {
+                collectedDiamonds.Add((changedPositionX, changedPositionY));
+                return true;
+            }
+            return false;
         }
     }
 }
