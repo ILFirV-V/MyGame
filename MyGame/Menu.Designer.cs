@@ -36,9 +36,12 @@ namespace MyGame
             // 
             // StartGameButton
             // 
-            this.StartGameButton.Location = new System.Drawing.Point(242, 100);
+            this.StartGameButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.StartGameButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.StartGameButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.StartGameButton.Location = new System.Drawing.Point(248, 78);
             this.StartGameButton.Name = "StartGameButton";
-            this.StartGameButton.Size = new System.Drawing.Size(150, 39);
+            this.StartGameButton.Size = new System.Drawing.Size(277, 79);
             this.StartGameButton.TabIndex = 0;
             this.StartGameButton.Text = "Начать игру";
             this.StartGameButton.UseVisualStyleBackColor = true;
@@ -46,9 +49,12 @@ namespace MyGame
             // 
             // ExitGameButton
             // 
-            this.ExitGameButton.Location = new System.Drawing.Point(242, 234);
+            this.ExitGameButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ExitGameButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ExitGameButton.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ExitGameButton.Location = new System.Drawing.Point(248, 297);
             this.ExitGameButton.Name = "ExitGameButton";
-            this.ExitGameButton.Size = new System.Drawing.Size(150, 31);
+            this.ExitGameButton.Size = new System.Drawing.Size(277, 69);
             this.ExitGameButton.TabIndex = 1;
             this.ExitGameButton.Text = "Выйти";
             this.ExitGameButton.UseVisualStyleBackColor = true;
@@ -56,9 +62,11 @@ namespace MyGame
             // 
             // InstructionButton
             // 
-            this.InstructionButton.Location = new System.Drawing.Point(242, 161);
+            this.InstructionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.InstructionButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.InstructionButton.Location = new System.Drawing.Point(248, 190);
             this.InstructionButton.Name = "InstructionButton";
-            this.InstructionButton.Size = new System.Drawing.Size(150, 36);
+            this.InstructionButton.Size = new System.Drawing.Size(277, 72);
             this.InstructionButton.TabIndex = 2;
             this.InstructionButton.Text = "Инструкция";
             this.InstructionButton.UseVisualStyleBackColor = true;
@@ -68,7 +76,7 @@ namespace MyGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 470);
+            this.ClientSize = new System.Drawing.Size(796, 470);
             this.Controls.Add(this.InstructionButton);
             this.Controls.Add(this.ExitGameButton);
             this.Controls.Add(this.StartGameButton);

@@ -14,15 +14,21 @@ namespace MyGame
     {
         public Menu()
         {
+            //ExitGameButton.Anchor = AnchorStyles.None;
+            //InstructionButton.Anchor = AnchorStyles.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            Size = Screen.PrimaryScreen.Bounds.Size;
             InitializeComponent();
         }
 
         private void StartGameButton_Click(object sender, EventArgs e)
         {
+
             var create = false;
             foreach (Form form in Application.OpenForms)
             {
-                if (form.Name.ToString() == "Form1")
+                if (form.Name == "Form1")
                 {
                     this.Hide();
                     form.Visible = true;
