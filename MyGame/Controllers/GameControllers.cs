@@ -9,8 +9,6 @@ namespace MyGame.Controllers
 {
     class GameControllers
     {
-        public static Dictionary<(int, int), bool> statusDiamonds = new Dictionary<(int, int), bool>();
-
         public static bool EssenceInAir(int positionX, int positionY)
         {
             var changedPositionY = (int)Math.Ceiling(positionY / 30.0);
@@ -51,11 +49,6 @@ namespace MyGame.Controllers
                 || (Map.getMapPieceType(changedPositionX + direction, changedPositionY) == 4))
                 return true;
             return false;
-        }
-
-        public static bool getStatusDiamonds(int i, int j)
-        {
-            return statusDiamonds.ContainsKey((i, j)) && statusDiamonds[(i, j)];
         }
     }
 }

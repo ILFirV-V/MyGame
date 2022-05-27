@@ -142,11 +142,9 @@ namespace MyGame.Models
             var changedPositionY = (int) Math.Ceiling((positionY + 25) / 30.0);
             var changedPositionX = (int) Math.Floor(positionX / 30.0);
             if (Map.getMapPieceType(changedPositionX, changedPositionY) == 9 && !(collectedDiamonds.Contains((changedPositionX, changedPositionY)) && collectedDiamonds != null))
-                //&& GameControllers.getStatusDiamonds(changedPositionX, changedPositionY))
             {
                 collectedDiamonds.Add((changedPositionX, changedPositionY));
                 diamonds++;
-                GameControllers.statusDiamonds[(changedPositionX, changedPositionY)] = true;
             }
         }
     }
