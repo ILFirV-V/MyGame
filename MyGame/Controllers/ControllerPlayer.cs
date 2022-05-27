@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using MyGame.Models;
 
 namespace MyGame.Controllers
@@ -64,7 +65,7 @@ namespace MyGame.Controllers
                     }
                     else
                     {
-                        player.changeX = 4;
+                        player.changeX = 5;
                         player.isMoving = true;
                         player.ChangeAnimation(1);
                     }
@@ -81,7 +82,7 @@ namespace MyGame.Controllers
                     }
                     else
                     {
-                        player.changeX = -4;
+                        player.changeX = -5;
                         player.isMoving = true;
                         player.ChangeAnimation(1);
                     }
@@ -103,10 +104,8 @@ namespace MyGame.Controllers
                 case Keys.Enter:
                     if (player.characterDied)
                         break;
-                    player.ChangeAnimation(5);
-                    player.isAttack = true;
-                    player.changeX = 0;
-                    player.changeY = 0;
+                    player.isAttack = player.weapon.cartridgesCount > 0;
+                    player.ChangeAnimation(player.isAttack ? 5 : 0);
                     break;
             }
         }
@@ -117,7 +116,7 @@ namespace MyGame.Controllers
             player.changeY = 0;
             player.isMoving = false;
             player.isJump = false;
-            player.attackLevel = 0;
+            player.isAttack = false;
             player.ChangeAnimation(player.characterDied ? 10 : 0);
         }
     }

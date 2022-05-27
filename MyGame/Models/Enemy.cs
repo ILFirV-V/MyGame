@@ -103,7 +103,7 @@ namespace MyGame.Models
             if (PlayerAttackMe())
             {
                 life -= player.weapon.damage;
-                player.weapon.cartridgesCount -= 2;
+                //player.weapon.cartridgesCount -= 2;
             }
 
             if (life <= 0)

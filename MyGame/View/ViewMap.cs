@@ -14,7 +14,6 @@ namespace MyGame.View
     {
         public static void DrawMap(Graphics g, Player player)
         {
-            var a = 0;
             for (var i = 0; i < Map.mapWidth ;  i++)
             {
                 for (var j = 0; j < Map.mapHeight; j++)
@@ -67,10 +66,7 @@ namespace MyGame.View
                             PaintPartMap(g, i, j, 320, 140);
                             PaintPartMap(g, i, j, 120, 120);
                             break;
-                        case 14:
-                            PaintPartMap(g, i, j, 320, 140);
-                            PaintPartMap(g, i, j, 200 + player.diamonds * 20, 160);
-                            break;
+                        
                         case 15:
                             PaintPartMap(g, i, j, 320, 140);
                             break;
@@ -97,6 +93,14 @@ namespace MyGame.View
                         case 24:
                             PaintPartMap(g, i, j, 320, 140);
                             PaintLifePlayer(250, 225, i, j, g, player);
+                            break;
+                        case 30:
+                            PaintPartMap(g, i, j, 320, 140);
+                            PaintPartMap(g, i, j, 200 + (player.diamonds/10) * 20, 160);
+                            break;
+                        case 31:
+                            PaintPartMap(g, i, j, 320, 140);
+                            PaintPartMap(g, i, j, 200 + (player.diamonds % 10) * 20, 160);
                             break;
                     }
                 }

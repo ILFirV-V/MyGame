@@ -36,11 +36,12 @@ namespace MyGame.Models
         public int XP;
         public int attackPower;
         public int jumpLevel = -1;
-        public int diamonds;
         public int attackLevel = -1;
 
         public bool characterDied;
         public Weapon weapon;
+
+        public int diamonds;
         public List<(int, int)> collectedDiamonds;
 
         public Player(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames,
@@ -61,7 +62,7 @@ namespace MyGame.Models
             diamondsCount = 0;
             XP = 250;
             attackPower = 0;
-            weapon = new Weapon(2, 20);
+            weapon = new Weapon(2, 5);
             collectedDiamonds = new List<(int, int)>();
         }
 
@@ -121,11 +122,20 @@ namespace MyGame.Models
 
         public void Attack()
         {
-            if (isAttack && weapon.cartridgesCount > 0)
+            if (isAttack)
             {
-                isAttack = false;
                 weapon.cartridgesCount--;
+                isAttack = false;
             }
+
+
+
+            //if (!isAttack || weapon.cartridgesCount <= 0)
+            //    isAttack = false;
+            //if (isAttack && weapon.cartridgesCount > 0)
+            //{ 
+            //    weapon.cartridgesCount--;
+            //}
         }
 
         public void Fall()
@@ -141,7 +151,8 @@ namespace MyGame.Models
         {
             var changedPositionY = (int) Math.Ceiling((positionY + 25) / 30.0);
             var changedPositionX = (int) Math.Floor(positionX / 30.0);
-            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 9 && !(collectedDiamonds.Contains((changedPositionX, changedPositionY)) && collectedDiamonds != null))
+            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 9 
+                && !(collectedDiamonds.Contains((changedPositionX, changedPositionY)) && collectedDiamonds != null))
             {
                 collectedDiamonds.Add((changedPositionX, changedPositionY));
                 diamonds++;

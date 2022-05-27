@@ -41,7 +41,7 @@ namespace MyGame
             Size = Screen.PrimaryScreen.Bounds.Size;
             WindowState = FormWindowState.Maximized;
             //FormBorderStyle = FormBorderStyle.None;
-            player.positionX = 250;
+            player.positionX = ClientSize.Width - 100;
             player.positionY = ClientSize.Height - Map.mapConst * 6;
             leshy.positionX = 350;
             leshy.positionY = ClientSize.Height - Map.mapConst * 6;
@@ -75,8 +75,9 @@ namespace MyGame
 
         public void UpdatePlayer(object sender, EventArgs e)
         {
-            player.Move();
             player.Attack();
+            player.Move();
+            
             player.Jump1();
 
             player.StateOnMap();
