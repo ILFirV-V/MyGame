@@ -24,7 +24,6 @@ namespace MyGame
 
         private void StartGameButton_Click(object sender, EventArgs e)
         {
-
             var create = false;
             foreach (Form form in Application.OpenForms)
             {

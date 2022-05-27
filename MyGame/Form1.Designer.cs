@@ -36,24 +36,40 @@ namespace MyGame
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.inscriptionVictoryGame = new System.Windows.Forms.Label();
+            this.buttonOutMenu = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // inscriptionVictoryGame
             // 
             this.inscriptionVictoryGame.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.inscriptionVictoryGame.Font = new System.Drawing.Font("Mistral", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.inscriptionVictoryGame.Location = new System.Drawing.Point(169, 96);
+            this.inscriptionVictoryGame.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.inscriptionVictoryGame.Font = new System.Drawing.Font("Mistral", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.inscriptionVictoryGame.Location = new System.Drawing.Point(410, 143);
             this.inscriptionVictoryGame.Name = "inscriptionVictoryGame";
-            this.inscriptionVictoryGame.Size = new System.Drawing.Size(295, 151);
+            this.inscriptionVictoryGame.Size = new System.Drawing.Size(661, 400);
             this.inscriptionVictoryGame.TabIndex = 0;
             this.inscriptionVictoryGame.Text = "Victory Game";
             this.inscriptionVictoryGame.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.inscriptionVictoryGame.Visible = false;
             this.inscriptionVictoryGame.Enter += new System.EventHandler(this.InscriptionVictoryGame_Click);
             // 
+            // buttonOutMenu
+            // 
+            this.buttonOutMenu.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonOutMenu.Font = new System.Drawing.Font("Mistral", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonOutMenu.Location = new System.Drawing.Point(410, 546);
+            this.buttonOutMenu.Name = "buttonOutMenu";
+            this.buttonOutMenu.Size = new System.Drawing.Size(661, 120);
+            this.buttonOutMenu.TabIndex = 1;
+            this.buttonOutMenu.Text = "Выйти в меню";
+            this.buttonOutMenu.UseVisualStyleBackColor = true;
+            this.buttonOutMenu.Visible = false;
+            this.buttonOutMenu.Click += new System.EventHandler(this.buttonOutMenu_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1500, 800);
+            this.Controls.Add(this.buttonOutMenu);
             this.Controls.Add(this.inscriptionVictoryGame);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -70,6 +86,7 @@ namespace MyGame
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.Label inscriptionVictoryGame;
+        private System.Windows.Forms.Button buttonOutMenu;
     }
 }
 

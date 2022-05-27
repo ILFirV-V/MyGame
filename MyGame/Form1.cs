@@ -114,7 +114,31 @@ namespace MyGame
         private void InscriptionVictoryGame_Click(object sender, EventArgs e)
         {
             if (GameControllers.VictoryGame)
+            {
                 inscriptionVictoryGame.Visible = true;
+                buttonOutMenu.Visible = true;
+            }
+        }
+
+        private void buttonOutMenu_Click(object sender, EventArgs e)
+        {
+            var create = false;
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.Name == "Menu")
+                {
+                    this.Hide();
+                    form.Visible = true;
+                    create = true;
+                    break;
+                }
+            }
+            if (create == false)
+            {
+                var createForm = new Menu();
+                this.Hide();
+                createForm.Show();
+            }
         }
     }
 }
