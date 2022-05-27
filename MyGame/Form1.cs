@@ -23,6 +23,8 @@ namespace MyGame
         private Enemy leshy;
         public Image adventurerSheet;
         private Enemy adventurer;
+        public Image twigSheet;
+        private Enemy twig;
         private ControllerPlayer controller;
 
         public Form1()
@@ -30,10 +32,8 @@ namespace MyGame
             InitializeComponent();
             timer1.Interval = 30;
             timer1.Tick += UpdatePlayer;
-            timer2.Interval = 35;
-            timer2.Tick += UpdateBattle;
+            timer2.Interval = 45;
             timer2.Tick += UpdateEnemy;
-
             Init();
             controller = new ControllerPlayer(player);
             KeyDown += controller.OnPress;
@@ -43,16 +43,7 @@ namespace MyGame
             //FormBorderStyle = FormBorderStyle.None;
             player.positionX = ClientSize.Width - 100;
             player.positionY = ClientSize.Height - Map.mapConst * 6;
-            leshy.positionX = 350;
-            leshy.positionY = ClientSize.Height - Map.mapConst * 6;
-            adventurer.positionX = 550;
-            adventurer.positionY = ClientSize.Height - Map.mapConst * 12; 
             MaximizeBox = false;
-        }
-
-        public void Pl()
-        {
-
         }
 
         public void Init()
@@ -67,12 +58,18 @@ namespace MyGame
             var directoryInfoLeshy = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfoLeshy != null)
                 leshySheet = new Bitmap(Path.Combine(directoryInfoLeshy.Parent.FullName, "Sprites\\Leshy.png"));
-            leshy = new Enemy(100, 100, leshySheet, 35, 1, 8, 6, 6, player, 50, 0, 1, 2, 4);
+            leshy = new Enemy(350, ClientSize.Height - Map.mapConst * 10, leshySheet, 35, 1, 8, 6, 6, player, 50, 0, 1, 2, 4);
 
             var directoryInfoShardsoul = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfoShardsoul != null)
                 adventurerSheet = new Bitmap(Path.Combine(directoryInfoShardsoul.Parent.FullName, "Sprites\\Adventurer.png"));
-            adventurer = new Enemy(100, 100, adventurerSheet, 35, 1, 8, 6, 6, player, 100, 0, 1, 6, 5);
+            adventurer = new Enemy(550, ClientSize.Height - Map.mapConst * 14, adventurerSheet, 35, 1, 8, 6, 6, player, 100, 0, 1, 6, 5);
+
+            var directoryInfoTwig = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
+            if (directoryInfoTwig != null)
+                twigSheet = new Bitmap(Path.Combine(directoryInfoTwig.Parent.FullName, "Sprites\\Twig.png"));
+            twig = new Enemy(100, ClientSize.Height - Map.mapConst * 6, twigSheet, 35, 1, 8, 6, 5, player, 50, 0, 1, 2, 4);
+
             timer2.Start();
             timer1.Start();
 
@@ -82,16 +79,8 @@ namespace MyGame
         {
             player.Attack();
             player.Move();
-            
             player.Jump1();
-
             player.StateOnMap();
-        }
-
-        public void UpdateBattle(object sender, EventArgs e)
-        {
-            leshy.Battle();
-            adventurer.Battle();
         }
 
         public void UpdateEnemy(object sender, EventArgs e)
@@ -99,11 +88,15 @@ namespace MyGame
             leshy.Fall();
             if (leshy.isMoving)
                 leshy.Move();
+            twig.Fall();
+            if (twig.isMoving)
+                twig.Move();
             adventurer.Fall();
             if (adventurer.isMoving)
                 adventurer.Move();
             leshy.Battle();
             adventurer.Battle();
+            twig.Battle();
             Invalidate();
         }
 
@@ -114,6 +107,7 @@ namespace MyGame
             ViewPlayer.PlayerAnimation(sender, g, player);
             ViewEnemy.EnemyAnimation(sender, g, leshy);
             ViewEnemy.EnemyAnimation(sender, g, adventurer);
+            ViewEnemy.EnemyAnimation(sender, g, twig);
         }
     }
 }

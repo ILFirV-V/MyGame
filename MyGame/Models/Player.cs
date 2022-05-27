@@ -8,7 +8,7 @@ using MyGame.Controllers;
 
 namespace MyGame.Models
 {
-    class Player
+    public class Player
     {
         public int size;
         public Image spriteSheet;

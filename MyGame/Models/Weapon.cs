@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyGame.Models
 {
-    class Weapon
+    public class Weapon
     {
         public int damage;
         public int cartridgesCount;
