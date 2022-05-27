@@ -121,6 +121,7 @@ namespace MyGame.Controllers
                     player.ChangeAnimation(player.isAttackGun ? 5 : 0);
                     break;
                 case Keys.Enter:
+                    player.isVictoryGame();
                     break;
             }
         }

@@ -37,6 +37,7 @@ namespace MyGame
             Init();
             controller = new ControllerPlayer(player);
             KeyDown += controller.OnPress;
+            KeyDown += InscriptionVictoryGame_Click;
             KeyUp += controller.OnKeyUp;
             Size = Screen.PrimaryScreen.Bounds.Size;
             WindowState = FormWindowState.Maximized;
@@ -108,6 +109,12 @@ namespace MyGame
             ViewEnemy.EnemyAnimation(sender, g, leshy);
             ViewEnemy.EnemyAnimation(sender, g, adventurer);
             ViewEnemy.EnemyAnimation(sender, g, twig);
+        }
+
+        private void InscriptionVictoryGame_Click(object sender, EventArgs e)
+        {
+            if (GameControllers.VictoryGame)
+                inscriptionVictoryGame.Visible = true;
         }
     }
 }

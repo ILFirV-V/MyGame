@@ -9,6 +9,7 @@ namespace MyGame.Controllers
 {
     class GameControllers
     {
+        public static bool VictoryGame;
         public static bool EssenceInAir(int positionX, int positionY)
         {
             var changedPositionY = (int)Math.Ceiling(positionY / 30.0);

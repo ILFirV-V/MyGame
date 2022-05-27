@@ -23,6 +23,7 @@ namespace MyGame.Models
         public bool isMoving;
         public bool isJump;
         public bool isAttackGun;
+        public bool isHaveKey;
 
         public int currentAnimation;
         public int currentImageLimit;
@@ -150,7 +151,7 @@ namespace MyGame.Models
             }
         }
 
-        public void isCollectCartridges()
+        public void isCollectsCartridges()
         {
             var changedPositionY = (int)Math.Ceiling((positionY + 25) / 30.0);
             var changedPositionX = (int)Math.Floor(positionX / 30.0);
@@ -159,6 +160,26 @@ namespace MyGame.Models
             {
                 collectedCartridges.Add((changedPositionX, changedPositionY));
                 weapon.cartridgesCount += 25;
+            }
+        }
+
+        public void isCollectsKey()
+        {
+            var changedPositionY = (int)Math.Ceiling((positionY + 25) / 30.0);
+            var changedPositionX = (int)Math.Floor(positionX / 30.0);
+            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 16)
+            {
+                isHaveKey = true;
+            }
+        }
+
+        public void isVictoryGame()
+        {
+            var changedPositionY = (int)Math.Ceiling((positionY + 25) / 30.0);
+            var changedPositionX = (int)Math.Floor(positionX / 30.0);
+            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 10 && isHaveKey)
+            {
+                GameControllers.VictoryGame = true;
             }
         }
     }

@@ -51,12 +51,24 @@ namespace MyGame
 
         private void InstructionButton_Click(object sender, EventArgs e)
         {
-
+            instruction.Visible = true;
+            buttonExitInstruction.Visible = true;
         }
 
         private void Menu_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonExitInstruction_Click(object sender, EventArgs e)
+        {
+            instruction.Visible = false;
+            buttonExitInstruction.Visible = false;
         }
     }
 }
