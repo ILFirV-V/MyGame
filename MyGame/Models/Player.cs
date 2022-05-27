@@ -37,6 +37,7 @@ namespace MyGame.Models
         public int attackPower;
         public int jumpLevel = -1;
         public int diamonds;
+        public int attackLevel = -1;
 
         public bool characterDied;
         public Weapon weapon;
@@ -120,8 +121,11 @@ namespace MyGame.Models
 
         public void Attack()
         {
-
-            isAttack = false;
+            if (isAttack && weapon.cartridgesCount > 0)
+            {
+                isAttack = false;
+                weapon.cartridgesCount--;
+            }
         }
 
         public void Fall()
@@ -133,16 +137,17 @@ namespace MyGame.Models
             }
         }
 
-        public bool isCollectsDiamond()
+        public void isCollectsDiamond()
         {
             var changedPositionY = (int) Math.Ceiling((positionY + 25) / 30.0);
             var changedPositionX = (int) Math.Floor(positionX / 30.0);
-            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 9)
+            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 9 && !(collectedDiamonds.Contains((changedPositionX, changedPositionY)) && collectedDiamonds != null))
+                //&& GameControllers.getStatusDiamonds(changedPositionX, changedPositionY))
             {
                 collectedDiamonds.Add((changedPositionX, changedPositionY));
-                return true;
+                diamonds++;
+                GameControllers.statusDiamonds[(changedPositionX, changedPositionY)] = true;
             }
-            return false;
         }
     }
 }

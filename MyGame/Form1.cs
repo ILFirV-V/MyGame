@@ -31,7 +31,7 @@ namespace MyGame
             timer1.Interval = 30;
             timer1.Tick += UpdatePlayer;
             timer2.Interval = 35;
-            timer2.Tick += UpdateEnemyBattle;
+            timer2.Tick += UpdateBattle;
             timer2.Tick += UpdateEnemy;
 
             Init();
@@ -76,18 +76,13 @@ namespace MyGame
         public void UpdatePlayer(object sender, EventArgs e)
         {
             player.Move();
+            player.Attack();
             player.Jump1();
+
             player.StateOnMap();
         }
 
-        public void UpdatePlayerJump(object sender, EventArgs e)
-        {
-
-            if(player.isJump)
-                player.Jump1();
-        }
-
-        public void UpdateEnemyBattle(object sender, EventArgs e)
+        public void UpdateBattle(object sender, EventArgs e)
         {
             leshy.Battle();
             adventurer.Battle();

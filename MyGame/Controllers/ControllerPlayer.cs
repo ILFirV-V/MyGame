@@ -103,10 +103,10 @@ namespace MyGame.Controllers
                 case Keys.Enter:
                     if (player.characterDied)
                         break;
+                    player.ChangeAnimation(5);
                     player.isAttack = true;
                     player.changeX = 0;
                     player.changeY = 0;
-                    player.ChangeAnimation(5);
                     break;
             }
         }
@@ -116,8 +116,8 @@ namespace MyGame.Controllers
             player.changeX = 0;
             player.changeY = 0;
             player.isMoving = false;
-            player.isAttack = false;
-            player.jumpLevel = 0;
+            player.isJump = false;
+            player.attackLevel = 0;
             player.ChangeAnimation(player.characterDied ? 10 : 0);
         }
     }

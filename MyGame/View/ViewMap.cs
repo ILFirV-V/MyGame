@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MyGame.Controllers;
 using MyGame.Models;
 
 namespace MyGame.View
@@ -70,7 +71,7 @@ namespace MyGame.View
                             break;
                         case 14:
                             PaintMap(g, i, j, 320, 140);
-                            PaintMap(g, i, j, 200, 160);
+                            PaintMap(g, i, j, 200 + player.diamonds * 20, 160);
                             break;
                         case 15:
                             PaintMap(g, i, j, 320, 140);
