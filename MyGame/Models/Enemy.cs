@@ -149,7 +149,7 @@ namespace MyGame.Models
 
         public bool PlayerAttackMe()
         {
-            return IsSeePlayer() && player.isAttack;
+            return IsSeePlayer() && player.isAttackGun;
         }
     }
 }

@@ -10,11 +10,13 @@ namespace MyGame.Models
     {
         public int damage;
         public int cartridgesCount;
+        public int numberCartridgesChamber;
 
         public Weapon(int damage, int cartridgesCount)
         {
             this.damage = damage;
             this.cartridgesCount = cartridgesCount;
+            numberCartridgesChamber = 6;
         }
     }
 }

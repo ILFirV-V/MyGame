@@ -102,13 +102,23 @@ namespace MyGame.Controllers
                     player.isJump = true;
                     break;
                 case Keys.R:
-                    player.weapon.cartridgesCount++;
+                    if (player.weapon.cartridgesCount > 0 && player.weapon.numberCartridgesChamber < 6)
+                    {
+                        player.weapon.numberCartridgesChamber++;
+                        player.weapon.cartridgesCount--;
+                        player.changeX = 0;
+                        player.changeY = 0;
+                        player.isAttackGun = false;
+                        player.isMoving = false;
+                        player.ChangeAnimation(0);
+                    }
                     break;
                 case Keys.Enter:
                     if (player.characterDied)
                         break;
-                    player.isAttack = player.weapon.cartridgesCount > 0;
-                    player.ChangeAnimation(player.isAttack ? 5 : 0);
+                    player.isMoving = false;
+                    player.isAttackGun = player.weapon.numberCartridgesChamber > 0;
+                    player.ChangeAnimation(player.isAttackGun ? 5 : 0);
                     break;
             }
         }
@@ -119,7 +129,7 @@ namespace MyGame.Controllers
             player.changeY = 0;
             player.isMoving = false;
             player.isJump = false;
-            player.isAttack = false;
+            player.isAttackGun = false;
             player.ChangeAnimation(player.characterDied ? 10 : 0);
         }
     }

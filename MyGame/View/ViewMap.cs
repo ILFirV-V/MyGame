@@ -66,13 +66,20 @@ namespace MyGame.View
                             PaintPartMap(g, i, j, 320, 140);
                             PaintPartMap(g, i, j, 120, 120);
                             break;
-                        
                         case 15:
                             PaintPartMap(g, i, j, 320, 140);
                             break;
                         case 16:
                             PaintPartMap(g, i, j, 320, 140);
                             PaintPartMap(g, i, j, 140, 60);
+                            break;
+                        case 17:
+                            PaintPartMap(g, i, j, 320, 140);
+                            PaintCartridges(i, j, g, player);
+                            break;
+                        case 18:
+                            PaintPartMap(g, i, j, 320, 140);
+                            PaintPartMap(g, i, j, 160, 0);
                             break;
                         case 20:
                             PaintPartMap(g, i, j, 320, 140);
@@ -102,6 +109,18 @@ namespace MyGame.View
                             PaintPartMap(g, i, j, 320, 140);
                             PaintPartMap(g, i, j, 200 + (player.diamonds % 10) * 20, 160);
                             break;
+                        case 40:
+                            PaintPartMap(g, i, j, 320, 140);
+                            PaintPartMap(g, i, j, 200 + (player.weapon.cartridgesCount / 100) * 20, 160);
+                            break;
+                        case 41:
+                            PaintPartMap(g, i, j, 320, 140);
+                            PaintPartMap(g, i, j, 200 + ((player.weapon.cartridgesCount / 10) % 10) * 20, 160);
+                            break;
+                        case 42:
+                            PaintPartMap(g, i, j, 320, 140);
+                            PaintPartMap(g, i, j, 200 + (player.weapon.cartridgesCount % 10) * 20, 160);
+                            break;
                     }
                 }
             }
@@ -118,6 +137,13 @@ namespace MyGame.View
             player.isCollectsDiamond();
             if (!player.collectedDiamonds.Contains((i, j)) || player.collectedDiamonds == null)
                 PaintPartMap(g, i, j, 140, 60);
+        }
+
+        public static void PaintCartridges(int i, int j, Graphics g, Player player)
+        {
+            player.isCollectCartridges();
+            if (!player.collectedCartridges.Contains((i, j)) || player.collectedCartridges == null)
+                PaintPartMap(g, i, j, 160, 0);
         }
 
         public static void PaintPartMap(Graphics g, int i, int j, int widthCoordinates, int heightCoordinates)

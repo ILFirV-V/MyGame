@@ -22,7 +22,7 @@ namespace MyGame.Models
 
         public bool isMoving;
         public bool isJump;
-        public bool isAttack;
+        public bool isAttackGun;
 
         public int currentAnimation;
         public int currentImageLimit;
@@ -43,6 +43,7 @@ namespace MyGame.Models
 
         public int diamonds;
         public List<(int, int)> collectedDiamonds;
+        public List<(int, int)> collectedCartridges;
 
         public Player(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames,
             int deathFrames)
@@ -62,8 +63,9 @@ namespace MyGame.Models
             diamondsCount = 0;
             XP = 250;
             attackPower = 0;
-            weapon = new Weapon(2, 5);
+            weapon = new Weapon(5, 550);
             collectedDiamonds = new List<(int, int)>();
+            collectedCartridges = new List<(int, int)>();
         }
 
         public void ChangeAnimation(int currentAnimation)
@@ -94,7 +96,7 @@ namespace MyGame.Models
                 characterDied = true;
                 isMoving = false;
                 isJump = false;
-                isAttack = false;
+                isAttackGun = false;
             }
         }
 
@@ -122,20 +124,11 @@ namespace MyGame.Models
 
         public void Attack()
         {
-            if (isAttack)
+            if (isAttackGun)
             {
-                weapon.cartridgesCount--;
-                isAttack = false;
+                weapon.numberCartridgesChamber--;
+                isAttackGun = false;
             }
-
-
-
-            //if (!isAttack || weapon.cartridgesCount <= 0)
-            //    isAttack = false;
-            //if (isAttack && weapon.cartridgesCount > 0)
-            //{ 
-            //    weapon.cartridgesCount--;
-            //}
         }
 
         public void Fall()
@@ -156,6 +149,18 @@ namespace MyGame.Models
             {
                 collectedDiamonds.Add((changedPositionX, changedPositionY));
                 diamonds++;
+            }
+        }
+
+        public void isCollectCartridges()
+        {
+            var changedPositionY = (int)Math.Ceiling((positionY + 25) / 30.0);
+            var changedPositionX = (int)Math.Floor(positionX / 30.0);
+            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 17
+                && !(collectedCartridges.Contains((changedPositionX, changedPositionY)) && collectedCartridges != null))
+            {
+                collectedCartridges.Add((changedPositionX, changedPositionY));
+                weapon.cartridgesCount += 25;
             }
         }
     }
