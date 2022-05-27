@@ -50,6 +50,11 @@ namespace MyGame
             MaximizeBox = false;
         }
 
+        public void Pl()
+        {
+
+        }
+
         public void Init()
         {
             Map.Init();

@@ -144,7 +144,7 @@ namespace MyGame.Models
 
         public bool AttackPlayer()
         {
-            return player.positionX - direction * 20 == positionX && IsSeePlayer() ;
+            return (direction == -1 ? player.positionX - direction * 25 >= positionX : player.positionX - direction * 25 <= positionX) && IsSeePlayer();
         }
 
         public bool PlayerAttackMe()

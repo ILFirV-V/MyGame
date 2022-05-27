@@ -36,7 +36,6 @@ namespace MyGame.Models
         public int XP;
         public int attackPower;
         public int jumpLevel = -1;
-        public int attackLevel = -1;
 
         public bool characterDied;
         public Weapon weapon;
