@@ -1,141 +1,135 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Drawing;
 using MyGame.Controllers;
 
 namespace MyGame.Models
 {
     class Enemy
     {
-        private readonly Player player;
-        public int positionX;
-        public int positionY;
+        private readonly Player Player;
+        public int PositionX;
+        public int PositionY;
 
-        public int direction;
+        public int Direction;
 
-        public bool isMoving;
-        public bool isAttack;
+        public bool IsMoving;
+        public bool IsAttack;
 
-        public int size;
-        public Image spriteSheet;
+        public int Size;
+        public Image SpriteSheet;
 
-        public int currentAnimation;
-        public int currentImageLimit;
-        public int currentFrame;
-        public int idleFrames;
-        public int runFrames;
-        public int attackFrames;
-        public int deathFrames;
+        public int CurrentAnimation;
+        public int CurrentImageLimit;
+        public int CurrentFrame;
+        private readonly int IdleFrames;
+        private readonly int RunFrames;
+        private readonly int AttackFrames;
+        private readonly int DeathFrames;
 
-        public int life;
+        private int Xp;
+        public bool characterDied;
 
-        public int locationIdleFrames;
-        public int locationRunFrames;
-        public int locationAttackFrames;
-        public int locationDeathFrames;
-
-        public bool characterDied = false;
+        private readonly int LocationIdleFrames;
+        private readonly int LocationRunFrames;
+        private readonly int LocationAttackFrames;
+        private readonly int LocationDeathFrames;
 
         public Enemy(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames,
-            int deathFrames, Player player, int life, int locationIdleFrames, int locationRunFrames, int locationAttackFrames, int locationDeathFrames)
+            int deathFrames, Player player, int xp, int locationIdleFrames, int locationRunFrames, int locationAttackFrames, int locationDeathFrames)
         {
-            positionX = posX;
-            positionY = posY;
-            direction = 1;
-            this.size = size;
-            this.spriteSheet = spriteSheet;
-            this.idleFrames = idleFrames;
-            this.runFrames = runFrames;
-            this.attackFrames = attackFrames;
-            this.deathFrames = deathFrames;
-            currentFrame = 0;
-            this.player = player;
-            this.life = life;
-            this.locationIdleFrames = locationIdleFrames;
-            this.locationRunFrames = locationRunFrames;
-            this.locationAttackFrames = locationAttackFrames;
-            this.locationDeathFrames = locationDeathFrames;
+            PositionX = posX;
+            PositionY = posY;
+            Direction = 1;
+            Size = size;
+            SpriteSheet = spriteSheet;
+            IdleFrames = idleFrames;
+            RunFrames = runFrames;
+            AttackFrames = attackFrames;
+            DeathFrames = deathFrames;
+            CurrentFrame = 0;
+            Player = player;
+            Xp = xp;
+            LocationIdleFrames = locationIdleFrames;
+            LocationRunFrames = locationRunFrames;
+            LocationAttackFrames = locationAttackFrames;
+            LocationDeathFrames = locationDeathFrames;
         }
 
         public void ChangeAnimation(int currentAnimation)
         {
-            this.currentAnimation = currentAnimation;
-            if (currentAnimation == locationIdleFrames)
-                currentImageLimit = idleFrames;
-            else if (currentAnimation == locationRunFrames)
-                currentImageLimit = runFrames;
-            else if (currentAnimation == locationAttackFrames)
-                currentImageLimit = attackFrames;
-            else if (currentAnimation == locationDeathFrames)
-                currentImageLimit = deathFrames;
+            CurrentAnimation = currentAnimation;
+            if (currentAnimation == LocationIdleFrames)
+                CurrentImageLimit = IdleFrames;
+            else if (currentAnimation == LocationRunFrames)
+                CurrentImageLimit = RunFrames;
+            else if (currentAnimation == LocationAttackFrames)
+                CurrentImageLimit = AttackFrames;
+            else if (currentAnimation == LocationDeathFrames)
+                CurrentImageLimit = DeathFrames;
         }
 
         public void Move()
         {
+            Fall();
             if (characterDied)
                 return;
-            direction = player.positionX < positionX ? -1 : 1;
-            if (IsSeePlayer() && !AttackPlayer() && !GameControllers.InConflictLeftAndRight(positionX, positionY, direction))
+            if (!IsMoving) return;
+            Direction = Player.PositionX < PositionX ? -1 : 1;
+            if (IsSeePlayer() && !AttackPlayer() &&
+                !PhysicsController.InConflictLeftAndRight(PositionX, PositionY, Direction))
             {
-                ChangeAnimation(locationRunFrames);
-                positionX += direction * 2;
+                ChangeAnimation(LocationRunFrames);
+                PositionX += Direction * 2;
             }
             else
             {
-                ChangeAnimation(locationIdleFrames);
+                ChangeAnimation(LocationIdleFrames);
             }
         }
 
         public void Battle()
         {
-            direction = player.positionX < positionX ? -1 : 1;
-            if (AttackPlayer() && !characterDied && !player.characterDied)
+            Direction = Player.PositionX < PositionX ? -1 : 1;
+            if (AttackPlayer() && !characterDied && !Player.CharacterDied)
             {
-                ChangeAnimation(locationAttackFrames);
-                player.XP--;
+                ChangeAnimation(LocationAttackFrames);
+                Player.XP--;
             }
 
             if (PlayerAttackMe())
             {
-                life -= player.weapon.damage;
-                //player.weapon.cartridgesCount -= 2;
+                Xp -= Player.Weapon.Damage;
             }
 
-            if (life <= 0)
+            if (Xp <= 0)
             {
-                isMoving = false;
+                IsMoving = false;
                 characterDied = true;
-                isAttack = false;
-                ChangeAnimation(locationDeathFrames);
+                IsAttack = false;
+                ChangeAnimation(LocationDeathFrames);
             }
         }
 
         public void Fall()
         {
-            if (GameControllers.EssenceInAir(positionX, positionY))
+            if (PhysicsController.EssenceInAir(PositionX, PositionY))
             {
-                positionY += 2;
-                isMoving = false;
+                PositionY += 2;
+                IsMoving = false;
             }
             else
             {
-                isMoving = true;
+                IsMoving = true;
             }
         }
 
         public bool IsSeePlayer()
         {
-            var posY = positionY - 16;
+            var posY = PositionY - 16;
             for (var i = 1; i <= 32; i++)
             {
-                if (player.positionY == posY + i)
+                if (Player.PositionY == posY + i)
                 {
-                    isMoving = true;
+                    IsMoving = true;
                     return true;
                 }
             }
@@ -144,12 +138,12 @@ namespace MyGame.Models
 
         public bool AttackPlayer()
         {
-            return (direction == -1 ? player.positionX - direction * 25 >= positionX : player.positionX - direction * 25 <= positionX) && IsSeePlayer();
+            return (Direction == -1 ? Player.PositionX - Direction * 25 >= PositionX : Player.PositionX - Direction * 25 <= PositionX) && IsSeePlayer();
         }
 
         public bool PlayerAttackMe()
         {
-            return IsSeePlayer() && player.isAttackGun;
+            return IsSeePlayer() && Player.IsAttackGun;
         }
     }
 }

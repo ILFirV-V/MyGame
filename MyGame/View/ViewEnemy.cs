@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using MyGame.Models;
 
 namespace MyGame.View
@@ -12,14 +7,14 @@ namespace MyGame.View
     {
         public static void EnemyAnimation(object sender, Graphics g, Enemy enemy)
         {
-            if (enemy.currentFrame < enemy.currentImageLimit - 1)
-                enemy.currentFrame += 1;
-            else enemy.currentFrame = 0;
+            if (enemy.CurrentFrame < enemy.CurrentImageLimit - 1)
+                enemy.CurrentFrame += 1;
+            else enemy.CurrentFrame = 0;
             if (enemy.characterDied)
-                enemy.currentFrame = 10;
-            g.DrawImage(enemy.spriteSheet, new Rectangle(new Point(enemy.positionX - enemy.direction * enemy.size, enemy.positionY),
-                    new Size(enemy.direction * enemy.size * 2, enemy.size * 2)), 32 * enemy.currentFrame, 1 + 32 * enemy.currentAnimation,
-                enemy.size, enemy.size, GraphicsUnit.Pixel);
+                enemy.CurrentFrame = 10;
+            g.DrawImage(enemy.SpriteSheet, new Rectangle(new Point(enemy.PositionX - enemy.Direction * enemy.Size, enemy.PositionY),
+                    new Size(enemy.Direction * enemy.Size * 2, enemy.Size * 2)), 32 * enemy.CurrentFrame, 1 + 32 * enemy.CurrentAnimation,
+                enemy.Size, enemy.Size, GraphicsUnit.Pixel);
         }
     }
 }

@@ -8,15 +8,15 @@ namespace MyGame.Models
 {
     public class Weapon
     {
-        public int damage;
-        public int cartridgesCount;
-        public int numberCartridgesChamber;
+        public int Damage;
+        public int CartridgesCount;
+        public int NumberCartridgesChamber;
 
         public Weapon(int damage, int cartridgesCount)
         {
-            this.damage = damage;
-            this.cartridgesCount = cartridgesCount;
-            numberCartridgesChamber = 6;
+            Damage = damage;
+            CartridgesCount = cartridgesCount;
+            NumberCartridgesChamber = 6;
         }
     }
 }

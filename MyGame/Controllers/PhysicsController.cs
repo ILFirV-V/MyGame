@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MyGame.Models;
 
 namespace MyGame.Controllers
 {
-    class GameControllers
+    class PhysicsController
     {
         public static bool VictoryGame;
         public static bool EssenceInAir(int positionX, int positionY)
@@ -56,6 +52,16 @@ namespace MyGame.Controllers
                 possibleDifference += 1;
             }
             return false;
+        }
+
+        public static void CheckVictoryGame(Player player)
+        {
+            var changedPositionY = (int)Math.Ceiling((player.PositionY + 25) / 30.0);
+            var changedPositionX = (int)Math.Floor(player.PositionX / 30.0);
+            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 10 && player.IsHaveKey)
+            {
+                VictoryGame = true;
+            }
         }
     }
 }

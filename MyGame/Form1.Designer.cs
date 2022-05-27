@@ -51,7 +51,7 @@ namespace MyGame
             this.inscriptionVictoryGame.Text = "Victory Game";
             this.inscriptionVictoryGame.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.inscriptionVictoryGame.Visible = false;
-            this.inscriptionVictoryGame.Enter += new System.EventHandler(this.InscriptionVictoryGame_Click);
+            this.inscriptionVictoryGame.Enter += new System.EventHandler(this.WithdrawInscriptionVictoryGame_Click);
             // 
             // buttonOutMenu
             // 
@@ -64,7 +64,7 @@ namespace MyGame
             this.buttonOutMenu.Text = "Выйти в меню";
             this.buttonOutMenu.UseVisualStyleBackColor = true;
             this.buttonOutMenu.Visible = false;
-            this.buttonOutMenu.Click += new System.EventHandler(this.buttonOutMenu_Click);
+            this.buttonOutMenu.Click += new System.EventHandler(this.ButtonOutMenu_Click);
             // 
             // Form1
             // 

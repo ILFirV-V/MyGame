@@ -14,10 +14,8 @@ namespace MyGame
     {
         public Menu()
         {
-            //ExitGameButton.Anchor = AnchorStyles.None;
-            //InstructionButton.Anchor = AnchorStyles.None;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
             Size = Screen.PrimaryScreen.Bounds.Size;
             InitializeComponent();
         }
@@ -38,16 +36,6 @@ namespace MyGame
         {
             instruction.Visible = true;
             buttonExitInstruction.Visible = true;
-        }
-
-        private void Menu_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonExitInstruction_Click(object sender, EventArgs e)

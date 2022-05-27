@@ -22,119 +22,119 @@ namespace MyGame.Controllers
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    if (player.characterDied)
+                    if (player.CharacterDied)
                         break;
-                    if (GameControllers.InConflictStairsUp(player.positionX, player.positionY))
+                    if (PhysicsController.InConflictStairsUp(player.PositionX, player.PositionY))
                     {
-                        player.changeY = 0;
-                        player.isMoving = false;
+                        player.ChangeY = 0;
+                        player.IsMoving = false;
                         player.ChangeAnimation(0);
                     }
                     else
                     {
-                        player.changeY = -2;
-                        player.isMoving = true;
+                        player.ChangeY = -2;
+                        player.IsMoving = true;
                         player.ChangeAnimation(1);
                     }
                     break;
                 case Keys.S:
-                    if (player.characterDied)
+                    if (player.CharacterDied)
                         break;
-                    if (GameControllers.InConflictStairsDown(player.positionX, player.positionY))
+                    if (PhysicsController.InConflictStairsDown(player.PositionX, player.PositionY))
                     {
-                        player.changeY = 0;
-                        player.isMoving = false;
+                        player.ChangeY = 0;
+                        player.IsMoving = false;
                         player.ChangeAnimation(0);
                     }
                     else
                     {
-                        player.changeY = 2;
-                        player.isMoving = true;
+                        player.ChangeY = 2;
+                        player.IsMoving = true;
                         player.ChangeAnimation(1);
                     }
                     break;
                 case Keys.D:
-                    if (player.characterDied)
+                    if (player.CharacterDied)
                         break;
-                    player.direction = 1;
-                    if (GameControllers.InConflictLeftAndRight(player.positionX, player.positionY, player.direction))
+                    player.Direction = 1;
+                    if (PhysicsController.InConflictLeftAndRight(player.PositionX, player.PositionY, player.Direction))
                     {
-                        player.isMoving = false;
+                        player.IsMoving = false;
                         player.ChangeAnimation(0);
                     }
                     else
                     {
-                        player.changeX = 5;
-                        player.isMoving = true;
+                        player.ChangeX = 5;
+                        player.IsMoving = true;
                         player.ChangeAnimation(1);
                     }
                     break;
                 case Keys.A:
-                    if (player.characterDied)
+                    if (player.CharacterDied)
                         break;
-                    player.direction = -1;
-                    if (GameControllers.InConflictLeftAndRight(player.positionX, player.positionY, player.direction))
+                    player.Direction = -1;
+                    if (PhysicsController.InConflictLeftAndRight(player.PositionX, player.PositionY, player.Direction))
                     {
 
-                        player.isMoving = false;
+                        player.IsMoving = false;
                         player.ChangeAnimation(0);
                     }
                     else
                     {
-                        player.changeX = -5;
-                        player.isMoving = true;
+                        player.ChangeX = -5;
+                        player.IsMoving = true;
                         player.ChangeAnimation(1);
                     }
                     break;
                 case Keys.Q:
-                    if (player.characterDied)
+                    if (player.CharacterDied)
                         break;
-                    player.direction = -1;
+                    player.Direction = -1;
                     player.ChangeAnimation(0);
-                    player.isJump = true;
+                    player.IsJump = true;
                     break;
                 case Keys.E:
-                    if (player.characterDied)
+                    if (player.CharacterDied)
                         break;
-                    player.direction = 1;
+                    player.Direction = 1;
                     player.ChangeAnimation(0);
-                    player.isJump = true;
-                    player.jumpLevel = 0;
+                    player.IsJump = true;
+                    player.JumpLevel = 0;
                     break;
                 case Keys.R:
-                    if (player.weapon.cartridgesCount > 0 && player.weapon.numberCartridgesChamber < 6)
+                    if (player.Weapon.CartridgesCount > 0 && player.Weapon.NumberCartridgesChamber < 6)
                     {
-                        player.weapon.numberCartridgesChamber++;
-                        player.weapon.cartridgesCount--;
-                        player.changeX = 0;
-                        player.changeY = 0;
-                        player.isAttackGun = false;
-                        player.isMoving = false;
+                        player.Weapon.NumberCartridgesChamber++;
+                        player.Weapon.CartridgesCount--;
+                        player.ChangeX = 0;
+                        player.ChangeY = 0;
+                        player.IsAttackGun = false;
+                        player.IsMoving = false;
                         player.ChangeAnimation(0);
                     }
                     break;
                 case Keys.Space:
-                    if (player.characterDied)
+                    if (player.CharacterDied)
                         break;
-                    player.isMoving = false;
-                    player.isAttackGun = player.weapon.numberCartridgesChamber > 0;
-                    player.ChangeAnimation(player.isAttackGun ? 5 : 0);
+                    player.IsMoving = false;
+                    player.IsAttackGun = player.Weapon.NumberCartridgesChamber > 0;
+                    player.ChangeAnimation(player.IsAttackGun ? 5 : 0);
                     break;
                 case Keys.Enter:
-                    player.isVictoryGame();
+                    PhysicsController.CheckVictoryGame(player);
                     break;
             }
         }
 
         public void OnKeyUp(object sender, KeyEventArgs e)
         {
-            player.changeX = 0;
-            player.changeY = 0;
-            player.isMoving = false;
-            player.isJump = false;
-            player.isAttackGun = false;
-            player.jumpLevel = 0;
-            player.ChangeAnimation(player.characterDied ? 10 : 0);
+            player.ChangeX = 0;
+            player.ChangeY = 0;
+            player.IsMoving = false;
+            player.IsJump = false;
+            player.IsAttackGun = false;
+            player.JumpLevel = 0;
+            player.ChangeAnimation(player.CharacterDied ? 10 : 0);
         }
     }
 }

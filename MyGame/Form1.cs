@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using MyGame.Controllers;
 using MyGame.Models;
 using MyGame.View;
@@ -37,13 +30,10 @@ namespace MyGame
             Init();
             controller = new ControllerPlayer(player);
             KeyDown += controller.OnPress;
-            KeyDown += InscriptionVictoryGame_Click;
+            KeyDown += WithdrawInscriptionVictoryGame_Click;
             KeyUp += controller.OnKeyUp;
             Size = Screen.PrimaryScreen.Bounds.Size;
             WindowState = FormWindowState.Maximized;
-            //FormBorderStyle = FormBorderStyle.None;
-            player.positionX = ClientSize.Width - 100;
-            player.positionY = ClientSize.Height - Map.mapConst * 6;
             MaximizeBox = false;
         }
 
@@ -54,7 +44,7 @@ namespace MyGame
             var directoryInfoPlayer = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfoPlayer != null)
                 playerSheet = new Bitmap(Path.Combine(directoryInfoPlayer.Parent.FullName, "Sprites\\Player.png"));
-            player = new Player(100, 100, playerSheet, 35, 1, 8, 4, 5);
+            player = new Player(ClientSize.Width - 65, ClientSize.Height - Map.mapConst * 6, playerSheet, 35, 1, 8, 4, 5);
 
             var directoryInfoLeshy = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfoLeshy != null)
@@ -73,28 +63,20 @@ namespace MyGame
 
             timer2.Start();
             timer1.Start();
-
         }
 
         public void UpdatePlayer(object sender, EventArgs e)
         {
             player.Attack();
             player.Move();
-            player.Jump1();
             player.StateOnMap();
         }
 
         public void UpdateEnemy(object sender, EventArgs e)
         {
-            leshy.Fall();
-            if (leshy.isMoving)
-                leshy.Move();
-            twig.Fall();
-            if (twig.isMoving)
-                twig.Move();
-            adventurer.Fall();
-            if (adventurer.isMoving)
-                adventurer.Move();
+            leshy.Move();
+            twig.Move();
+            adventurer.Move();
             leshy.Battle();
             adventurer.Battle();
             twig.Battle();
@@ -111,17 +93,17 @@ namespace MyGame
             ViewEnemy.EnemyAnimation(sender, g, twig);
         }
 
-        private void InscriptionVictoryGame_Click(object sender, EventArgs e)
+        private void WithdrawInscriptionVictoryGame_Click(object sender, EventArgs e)
         {
-            if (GameControllers.VictoryGame)
+            if (PhysicsController.VictoryGame)
             {
                 inscriptionVictoryGame.Visible = true;
                 buttonOutMenu.Visible = true;
-                GameControllers.VictoryGame = false;
+                PhysicsController.VictoryGame = false;
             }
         }
 
-        private void buttonOutMenu_Click(object sender, EventArgs e)
+        private void ButtonOutMenu_Click(object sender, EventArgs e)
         {
             inscriptionVictoryGame.Visible = false;
             buttonOutMenu.Visible = false;

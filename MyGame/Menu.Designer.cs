@@ -92,7 +92,6 @@ namespace MyGame
     "ь патроны.\r\nПробел - огонь из оружия,\r\nесли оружие заряжено.\r\n";
             this.instruction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.instruction.Visible = false;
-            this.instruction.Click += new System.EventHandler(this.label1_Click);
             // 
             // buttonExitInstruction
             // 
@@ -121,7 +120,6 @@ namespace MyGame
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Menu";
             this.Text = "Menu";
-            this.Load += new System.EventHandler(this.Menu_Load);
             this.ResumeLayout(false);
 
         }

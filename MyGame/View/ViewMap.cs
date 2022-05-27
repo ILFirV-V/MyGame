@@ -71,8 +71,8 @@ namespace MyGame.View
                             break;
                         case 16:
                             PaintPartMap(g, i, j, 320, 140);
-                            player.isCollectsKey();
-                            if (!player.isHaveKey)
+                            player.CollectThings();
+                            if (!player.IsHaveKey)
                                 PaintPartMap(g, i, j, 140, 20);
                             break;
                         case 17:
@@ -102,14 +102,13 @@ namespace MyGame.View
                             PaintPartMap(g, i, j, 320, 140);
                             PaintLifePlayer(250, 225, i, j, g, player);
                             break;
-
                         case 51:
                             PaintPartMap(g, i, j, 320, 140);
                             PaintPartMap(g, i, j, 140, 20);
                             break;
                         case 52:
                             PaintPartMap(g, i, j, 320, 140);
-                            PaintPartMap(g, i, j, 200 + (player.isHaveKey ? 20 : 0), 160);
+                            PaintPartMap(g, i, j, 200 + (player.IsHaveKey ? 20 : 0), 160);
                             break;
                         case 53:
                             PaintPartMap(g, i, j, 320, 140);
@@ -117,15 +116,15 @@ namespace MyGame.View
                             break;
                         case 54:
                             PaintPartMap(g, i, j, 320, 140);
-                            PaintPartMap(g, i, j, 200 + (player.weapon.cartridgesCount / 100) * 20, 160);
+                            PaintPartMap(g, i, j, 200 + (player.Weapon.CartridgesCount / 100) * 20, 160);
                             break;
                         case 55:
                             PaintPartMap(g, i, j, 320, 140);
-                            PaintPartMap(g, i, j, 200 + ((player.weapon.cartridgesCount / 10) % 10) * 20, 160);
+                            PaintPartMap(g, i, j, 200 + ((player.Weapon.CartridgesCount / 10) % 10) * 20, 160);
                             break;
                         case 56:
                             PaintPartMap(g, i, j, 320, 140);
-                            PaintPartMap(g, i, j, 200 + (player.weapon.cartridgesCount % 10) * 20, 160);
+                            PaintPartMap(g, i, j, 200 + (player.Weapon.CartridgesCount % 10) * 20, 160);
                             break;
                         case 57:
                             PaintPartMap(g, i, j, 320, 140);
@@ -133,11 +132,11 @@ namespace MyGame.View
                             break;
                         case 58:
                             PaintPartMap(g, i, j, 320, 140);
-                            PaintPartMap(g, i, j, 200 + (player.diamonds / 10) * 20, 160);
+                            PaintPartMap(g, i, j, 200 + (player.Diamonds / 10) * 20, 160);
                             break;
                         case 59:
                             PaintPartMap(g, i, j, 320, 140);
-                            PaintPartMap(g, i, j, 200 + (player.diamonds % 10) * 20, 160);
+                            PaintPartMap(g, i, j, 200 + (player.Diamonds % 10) * 20, 160);
                             break;
                     }
                 }
@@ -152,15 +151,15 @@ namespace MyGame.View
 
         public static void PaintDiamonds(int i, int j, Graphics g, Player player)
         {
-            player.isCollectsDiamond();
-            if (!player.collectedDiamonds.Contains((i, j)) || player.collectedDiamonds == null)
+            player.CollectThings();
+            if (!player.CollectedDiamonds.Contains((i, j)) || player.CollectedDiamonds == null)
                 PaintPartMap(g, i, j, 140, 60);
         }
 
         public static void PaintCartridges(int i, int j, Graphics g, Player player)
         {
-            player.isCollectsCartridges();
-            if (!player.collectedCartridges.Contains((i, j)) || player.collectedCartridges == null)
+            player.CollectThings();
+            if (!player.CollectedCartridges.Contains((i, j)) || player.CollectedCartridges == null)
                 PaintPartMap(g, i, j, 160, 0);
         }
 

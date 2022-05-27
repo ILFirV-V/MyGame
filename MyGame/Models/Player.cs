@@ -10,79 +10,79 @@ namespace MyGame.Models
 {
     public class Player
     {
-        public int size;
-        public Image spriteSheet;
+        public int Size;
+        public Image SpriteSheet;
 
-        public int positionX;
-        public int positionY;
-        public int changeX;
-        public int changeY;
+        public int PositionX;
+        public int PositionY;
+        public int ChangeX;
+        public int ChangeY;
 
-        public int direction;
+        public int Direction;
 
-        public bool isMoving;
-        public bool isJump;
-        public bool isAttackGun;
-        public bool isHaveKey;
+        public bool IsMoving;
+        public bool IsJump;
+        public bool IsAttackGun;
+        public bool IsHaveKey;
 
-        public int currentAnimation;
-        public int currentImageLimit;
-        public int currentFrame;
-        public int idleFrames;
-        public int runFrames;
-        public int attackFrames;
-        public int deathFrames;
+        public int CurrentAnimation;
+        public int CurrentImageLimit;
+        public int CurrentFrame;
+        public int IdleFrames;
+        public int RunFrames;
+        public int AttackFrames;
+        public int DeathFrames;
 
-        public int diamondsCount;
+        public int DiamondsCount;
         public int XP;
-        public int attackPower;
-        public int jumpLevel = -1;
+        public int AttackPower;
+        public int JumpLevel = -1;
 
-        public bool characterDied;
-        public Weapon weapon;
+        public bool CharacterDied;
+        public Weapon Weapon;
 
-        public int diamonds;
-        public List<(int, int)> collectedDiamonds;
-        public List<(int, int)> collectedCartridges;
+        public int Diamonds;
+        public List<(int, int)> CollectedDiamonds;
+        public List<(int, int)> CollectedCartridges;
 
         public Player(int posX, int posY, Image spriteSheet, int size, int idleFrames, int runFrames, int attackFrames,
             int deathFrames)
         {
-            positionX = posX;
-            positionY = posY;
-            direction = 1;
-            this.size = size;
-            this.spriteSheet = spriteSheet;
-            this.idleFrames = idleFrames;
-            this.runFrames = runFrames;
-            this.attackFrames = attackFrames;
-            this.deathFrames = deathFrames;
+            PositionX = posX;
+            PositionY = posY;
+            Direction = 1;
+            Size = size;
+            SpriteSheet = spriteSheet;
+            IdleFrames = idleFrames;
+            RunFrames = runFrames;
+            AttackFrames = attackFrames;
+            DeathFrames = deathFrames;
 
-            currentFrame = 0;
-            diamondsCount = 0;
+            CurrentFrame = 0;
+            DiamondsCount = 0;
             XP = 250;
-            attackPower = 0;
-            weapon = new Weapon(5, 100);
-            collectedDiamonds = new List<(int, int)>();
-            collectedCartridges = new List<(int, int)>();
+            AttackPower = 0;
+            Weapon = new Weapon(5, 100);
+            CollectedDiamonds = new List<(int, int)>();
+            CollectedCartridges = new List<(int, int)>();
         }
 
         public void ChangeAnimation(int currentAnimation)
         {
-            this.currentAnimation = currentAnimation;
+            CurrentAnimation = currentAnimation;
             switch (currentAnimation)
             {
                 case 0:
-                    currentImageLimit = idleFrames;
+                    CurrentImageLimit = IdleFrames;
                     break;
                 case 1:
-                    currentImageLimit = runFrames;
+                    CurrentImageLimit = RunFrames;
                     break;
                 case 5:
-                    currentImageLimit = attackFrames;
+                    CurrentImageLimit = AttackFrames;
                     break;
                 case 6:
-                    currentImageLimit = deathFrames;
+                    CurrentImageLimit = DeathFrames;
                     break;
             }
         }
@@ -92,94 +92,70 @@ namespace MyGame.Models
             if (XP <= 0)
             {
                 ChangeAnimation(6);
-                characterDied = true;
-                isMoving = false;
-                isJump = false;
-                isAttackGun = false;
+                CharacterDied = true;
+                IsMoving = false;
+                IsJump = false;
+                IsAttackGun = false;
             }
         }
 
         public void Move()
         {
-            if (isMoving && !characterDied)
-            {
-                positionX += changeX;
-                positionY += changeY;
-            }
-
             Fall();
-        }
-
-        public void Jump1()
-        {
-            if (isJump && jumpLevel == 0)
+            if (IsMoving && !CharacterDied)
             {
-                positionX += direction * 20;
-                positionY -= 20;
-                jumpLevel = 1;
-                isJump = false;
+                PositionX += ChangeX;
+                PositionY += ChangeY;
             }
         }
 
         public void Attack()
         {
-            if (isAttackGun)
+            if (IsAttackGun)
             {
-                weapon.numberCartridgesChamber--;
-                isAttackGun = false;
+                Weapon.NumberCartridgesChamber--;
+                IsAttackGun = false;
             }
         }
 
         public void Fall()
         {
-            if (GameControllers.EssenceInAir(positionX, positionY) && !isJump)
+            if (PhysicsController.EssenceInAir(PositionX, PositionY) && !IsJump)
             {
-                isMoving = false;
-                positionY += 4;
+                IsMoving = false;
+                PositionY += 4;
             }
         }
 
-        public void isCollectsDiamond()
+        public void CollectThings()
         {
-            var changedPositionY = (int) Math.Ceiling((positionY + 25) / 30.0);
-            var changedPositionX = (int) Math.Floor(positionX / 30.0);
+            var changedPositionY = (int) Math.Ceiling((PositionY + 25) / 30.0);
+            var changedPositionX = (int) Math.Floor(PositionX / 30.0);
             if (Map.getMapPieceType(changedPositionX, changedPositionY) == 9 
-                && !(collectedDiamonds.Contains((changedPositionX, changedPositionY)) && collectedDiamonds != null))
+                && !(CollectedDiamonds.Contains((changedPositionX, changedPositionY)) && CollectedDiamonds != null))
             {
-                collectedDiamonds.Add((changedPositionX, changedPositionY));
-                diamonds++;
+                CollectedDiamonds.Add((changedPositionX, changedPositionY));
+                Diamonds++;
             }
-        }
-
-        public void isCollectsCartridges()
-        {
-            var changedPositionY = (int)Math.Ceiling((positionY + 25) / 30.0);
-            var changedPositionX = (int)Math.Floor(positionX / 30.0);
             if (Map.getMapPieceType(changedPositionX, changedPositionY) == 17
-                && !(collectedCartridges.Contains((changedPositionX, changedPositionY)) && collectedCartridges != null))
+                && !(CollectedCartridges.Contains((changedPositionX, changedPositionY)) && CollectedCartridges != null))
             {
-                collectedCartridges.Add((changedPositionX, changedPositionY));
-                weapon.cartridgesCount += 25;
+                CollectedCartridges.Add((changedPositionX, changedPositionY));
+                Weapon.CartridgesCount += 25;
             }
-        }
-
-        public void isCollectsKey()
-        {
-            var changedPositionY = (int)Math.Ceiling((positionY + 25) / 30.0);
-            var changedPositionX = (int)Math.Floor(positionX / 30.0);
             if (Map.getMapPieceType(changedPositionX, changedPositionY) == 16)
             {
-                isHaveKey = true;
+                IsHaveKey = true;
             }
         }
 
-        public void isVictoryGame()
+        public void CheckVictoryGame()
         {
-            var changedPositionY = (int)Math.Ceiling((positionY + 25) / 30.0);
-            var changedPositionX = (int)Math.Floor(positionX / 30.0);
-            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 10 && isHaveKey)
+            var changedPositionY = (int)Math.Ceiling((PositionY + 25) / 30.0);
+            var changedPositionX = (int)Math.Floor(PositionX / 30.0);
+            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 10 && IsHaveKey)
             {
-                GameControllers.VictoryGame = true;
+                PhysicsController.VictoryGame = true;
             }
         }
     }

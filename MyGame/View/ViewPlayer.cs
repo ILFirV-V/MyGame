@@ -12,14 +12,14 @@ namespace MyGame.View
     {
         public static void PlayerAnimation(object sender, Graphics g, Player player)
         {
-            if (player.currentFrame < player.currentImageLimit - 1)
-                player.currentFrame += 2;
-            else player.currentFrame = 0;
-            if (player.characterDied)
-                player.currentFrame = 4;
-            g.DrawImage(player.spriteSheet, new Rectangle(new Point(player.positionX - player.direction * player.size / 2, player.positionY), 
-                new Size(player.direction * player.size * 2, player.size * 2)), 20 + 32 * player.currentFrame, 3 + 32 * player.currentAnimation, 
-                player.size, player.size, GraphicsUnit.Pixel);
+            if (player.CurrentFrame < player.CurrentImageLimit - 1)
+                player.CurrentFrame += 2;
+            else player.CurrentFrame = 0;
+            if (player.CharacterDied)
+                player.CurrentFrame = 4;
+            g.DrawImage(player.SpriteSheet, new Rectangle(new Point(player.PositionX - player.Direction * player.Size / 2, player.PositionY), 
+                new Size(player.Direction * player.Size * 2, player.Size * 2)), 20 + 32 * player.CurrentFrame, 3 + 32 * player.CurrentAnimation, 
+                player.Size, player.Size, GraphicsUnit.Pixel);
         }
     }
 }
