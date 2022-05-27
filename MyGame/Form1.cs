@@ -117,11 +117,14 @@ namespace MyGame
             {
                 inscriptionVictoryGame.Visible = true;
                 buttonOutMenu.Visible = true;
+                GameControllers.VictoryGame = false;
             }
         }
 
         private void buttonOutMenu_Click(object sender, EventArgs e)
         {
+            inscriptionVictoryGame.Visible = false;
+            buttonOutMenu.Visible = false;
             var create = false;
             foreach (Form form in Application.OpenForms)
             {
