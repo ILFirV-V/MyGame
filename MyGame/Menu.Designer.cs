@@ -29,6 +29,7 @@ namespace MyGame
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.StartGameButton = new System.Windows.Forms.Button();
             this.ExitGameButton = new System.Windows.Forms.Button();
             this.InstructionButton = new System.Windows.Forms.Button();
@@ -76,12 +77,15 @@ namespace MyGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(796, 470);
             this.Controls.Add(this.InstructionButton);
             this.Controls.Add(this.ExitGameButton);
             this.Controls.Add(this.StartGameButton);
             this.Name = "Menu";
             this.Text = "Menu";
+            this.Load += new System.EventHandler(this.Menu_Load);
             this.ResumeLayout(false);
 
         }
