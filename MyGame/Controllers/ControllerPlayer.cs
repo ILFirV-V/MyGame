@@ -101,6 +101,9 @@ namespace MyGame.Controllers
                     player.ChangeAnimation(0);
                     player.isJump = true;
                     break;
+                case Keys.R:
+                    player.weapon.cartridgesCount++;
+                    break;
                 case Keys.Enter:
                     if (player.characterDied)
                         break;
