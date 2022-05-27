@@ -39,15 +39,21 @@ namespace MyGame.Controllers
 
         public static bool InConflictLeftAndRight(int positionX, int positionY, int direction)
         {
-            var changedPositionY = (int)Math.Ceiling((positionY + 25) / 30.0);
-            var changedPositionX = (int)Math.Floor(positionX / 30.0);
-            if (changedPositionX == 0)
-                changedPositionX = 1;
-            if (changedPositionX == 51)
-                changedPositionX = 50;
-            if (Map.getMapPieceType(changedPositionX + direction, positionY / 30) == 15
-                || (Map.getMapPieceType(changedPositionX + direction, changedPositionY) == 4))
-                return true;
+            var possibleDifference = 0;
+            while(possibleDifference < 3)
+            {
+                var changedPositionY = (int) Math.Ceiling((positionY + 25) / 30.0);
+                var changedPositionX = (int) Math.Floor((positionX) / 30.0);
+                if (changedPositionX == 0)
+                    changedPositionX = 1;
+                if (changedPositionX == 51)
+                    changedPositionX = 50;
+                if (Map.getMapPieceType(changedPositionX + direction, positionY / 30) == 15
+                    || (Map.getMapPieceType(changedPositionX + direction * possibleDifference, changedPositionY) == 4)
+                    || (Map.getMapPieceType(changedPositionX + direction * possibleDifference, changedPositionY) == 19))
+                    return true;
+                possibleDifference += 1;
+            }
             return false;
         }
     }

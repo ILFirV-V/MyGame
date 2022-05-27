@@ -80,7 +80,7 @@ namespace MyGame.Models
             if (characterDied)
                 return;
             direction = player.positionX < positionX ? -1 : 1;
-            if (IsSeePlayer() && !AttackPlayer())
+            if (IsSeePlayer() && !AttackPlayer() && !GameControllers.InConflictLeftAndRight(positionX, positionY, direction))
             {
                 ChangeAnimation(locationRunFrames);
                 positionX += direction * 2;
@@ -144,7 +144,7 @@ namespace MyGame.Models
 
         public bool AttackPlayer()
         {
-            return player.positionX - direction * 20 == positionX && IsSeePlayer();
+            return player.positionX - direction * 20 == positionX && IsSeePlayer() ;
         }
 
         public bool PlayerAttackMe()

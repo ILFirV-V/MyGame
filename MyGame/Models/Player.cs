@@ -58,12 +58,11 @@ namespace MyGame.Models
             this.attackFrames = attackFrames;
             this.deathFrames = deathFrames;
 
-
             currentFrame = 0;
             diamondsCount = 0;
             XP = 250;
             attackPower = 0;
-            weapon = new Weapon(5, 550);
+            weapon = new Weapon(5, 100);
             collectedDiamonds = new List<(int, int)>();
             collectedCartridges = new List<(int, int)>();
         }

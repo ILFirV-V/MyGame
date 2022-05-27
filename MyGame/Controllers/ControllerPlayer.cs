@@ -59,7 +59,6 @@ namespace MyGame.Controllers
                     player.direction = 1;
                     if (GameControllers.InConflictLeftAndRight(player.positionX, player.positionY, player.direction))
                     {
-                        player.changeX = 0;
                         player.isMoving = false;
                         player.ChangeAnimation(0);
                     }
@@ -76,7 +75,7 @@ namespace MyGame.Controllers
                     player.direction = -1;
                     if (GameControllers.InConflictLeftAndRight(player.positionX, player.positionY, player.direction))
                     {
-                        player.changeX = 0;
+
                         player.isMoving = false;
                         player.ChangeAnimation(0);
                     }
