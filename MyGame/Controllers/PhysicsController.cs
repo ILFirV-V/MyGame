@@ -63,5 +63,23 @@ namespace MyGame.Controllers
                 VictoryGame = true;
             }
         }
+
+        public static bool IsBulletHitWall(int positionX, int positionY)
+        {
+            var changedPositionY = (int)Math.Ceiling((positionY + 25) / 30.0);
+            var changedPositionX = (int)Math.Floor((positionX) / 30.0);
+            var possibleDifference = 0;
+            while (possibleDifference < Map.mapWidth)
+            {
+                if (changedPositionX == 0)
+                    changedPositionX = 1;
+                if (changedPositionX == 51)
+                    changedPositionX = 50;
+                if (Map.getMapPieceType(possibleDifference, changedPositionY) == 19)
+                    return true;
+                possibleDifference += 1;
+            }
+            return false;
+        }
     }
 }
