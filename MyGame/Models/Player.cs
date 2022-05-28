@@ -21,7 +21,6 @@ namespace MyGame.Models
         public int Direction;
 
         public bool IsMoving;
-        public bool IsJump;
         public bool IsAttackGun;
         public bool IsHaveKey;
 
@@ -33,7 +32,6 @@ namespace MyGame.Models
         public int AttackFrames;
         public int DeathFrames;
 
-        public int DiamondsCount;
         public int XP;
         public int AttackPower;
         public int JumpLevel = -1;
@@ -41,7 +39,7 @@ namespace MyGame.Models
         public bool CharacterDied;
         public Weapon Weapon;
 
-        public int Diamonds;
+        public int DiamondsCount;
         public List<(int, int)> CollectedDiamonds;
         public List<(int, int)> CollectedCartridges;
 
@@ -59,7 +57,6 @@ namespace MyGame.Models
             DeathFrames = deathFrames;
 
             CurrentFrame = 0;
-            DiamondsCount = 0;
             XP = 250;
             AttackPower = 0;
             Weapon = new Weapon(5, 100);
@@ -94,7 +91,6 @@ namespace MyGame.Models
                 ChangeAnimation(6);
                 CharacterDied = true;
                 IsMoving = false;
-                IsJump = false;
                 IsAttackGun = false;
             }
         }
@@ -120,7 +116,7 @@ namespace MyGame.Models
 
         public void Fall()
         {
-            if (PhysicsController.EssenceInAir(PositionX, PositionY) && !IsJump)
+            if (PhysicsController.EssenceInAir(PositionX, PositionY))
             {
                 IsMoving = false;
                 PositionY += 4;
@@ -135,7 +131,7 @@ namespace MyGame.Models
                 && !(CollectedDiamonds.Contains((changedPositionX, changedPositionY)) && CollectedDiamonds != null))
             {
                 CollectedDiamonds.Add((changedPositionX, changedPositionY));
-                Diamonds++;
+                DiamondsCount++;
             }
             if (Map.getMapPieceType(changedPositionX, changedPositionY) == 17
                 && !(CollectedCartridges.Contains((changedPositionX, changedPositionY)) && CollectedCartridges != null))
@@ -146,16 +142,6 @@ namespace MyGame.Models
             if (Map.getMapPieceType(changedPositionX, changedPositionY) == 16)
             {
                 IsHaveKey = true;
-            }
-        }
-
-        public void CheckVictoryGame()
-        {
-            var changedPositionY = (int)Math.Ceiling((PositionY + 25) / 30.0);
-            var changedPositionX = (int)Math.Floor(PositionX / 30.0);
-            if (Map.getMapPieceType(changedPositionX, changedPositionY) == 10 && IsHaveKey)
-            {
-                PhysicsController.VictoryGame = true;
             }
         }
     }

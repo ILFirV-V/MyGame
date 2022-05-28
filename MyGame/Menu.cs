@@ -43,5 +43,10 @@ namespace MyGame
             instruction.Visible = false;
             buttonExitInstruction.Visible = false;
         }
+
+        private void instruction_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

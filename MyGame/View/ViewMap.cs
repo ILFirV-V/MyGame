@@ -132,11 +132,11 @@ namespace MyGame.View
                             break;
                         case 58:
                             PaintPartMap(g, i, j, 320, 140);
-                            PaintPartMap(g, i, j, 200 + (player.Diamonds / 10) * 20, 160);
+                            PaintPartMap(g, i, j, 200 + (player.DiamondsCount / 10) * 20, 160);
                             break;
                         case 59:
                             PaintPartMap(g, i, j, 320, 140);
-                            PaintPartMap(g, i, j, 200 + (player.Diamonds % 10) * 20, 160);
+                            PaintPartMap(g, i, j, 200 + (player.DiamondsCount % 10) * 20, 160);
                             break;
                     }
                 }

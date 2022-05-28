@@ -84,21 +84,21 @@ namespace MyGame
             this.instruction.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.instruction.BackColor = System.Drawing.Color.White;
             this.instruction.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.instruction.Location = new System.Drawing.Point(150, 98);
+            this.instruction.Location = new System.Drawing.Point(26, 47);
             this.instruction.Name = "instruction";
-            this.instruction.Size = new System.Drawing.Size(507, 234);
+            this.instruction.Size = new System.Drawing.Size(734, 285);
             this.instruction.TabIndex = 3;
-            this.instruction.Text = "W - вверх, S - вниз, \r\nA - влево, D - вправо.\r\nR - перезарядка оружия, \r\nесли ест" +
-    "ь патроны.\r\nПробел - огонь из оружия,\r\nесли оружие заряжено.\r\n";
+            this.instruction.Text = resources.GetString("instruction.Text");
             this.instruction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.instruction.Visible = false;
+            this.instruction.Click += new System.EventHandler(this.instruction_Click);
             // 
             // buttonExitInstruction
             // 
             this.buttonExitInstruction.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonExitInstruction.Location = new System.Drawing.Point(150, 335);
+            this.buttonExitInstruction.Location = new System.Drawing.Point(26, 335);
             this.buttonExitInstruction.Name = "buttonExitInstruction";
-            this.buttonExitInstruction.Size = new System.Drawing.Size(507, 43);
+            this.buttonExitInstruction.Size = new System.Drawing.Size(734, 60);
             this.buttonExitInstruction.TabIndex = 4;
             this.buttonExitInstruction.Text = "Ок";
             this.buttonExitInstruction.UseVisualStyleBackColor = true;

@@ -86,21 +86,6 @@ namespace MyGame.Controllers
                         player.ChangeAnimation(1);
                     }
                     break;
-                case Keys.Q:
-                    if (player.CharacterDied)
-                        break;
-                    player.Direction = -1;
-                    player.ChangeAnimation(0);
-                    player.IsJump = true;
-                    break;
-                case Keys.E:
-                    if (player.CharacterDied)
-                        break;
-                    player.Direction = 1;
-                    player.ChangeAnimation(0);
-                    player.IsJump = true;
-                    player.JumpLevel = 0;
-                    break;
                 case Keys.R:
                     if (player.Weapon.CartridgesCount > 0 && player.Weapon.NumberCartridgesChamber < 6)
                     {
@@ -131,7 +116,6 @@ namespace MyGame.Controllers
             player.ChangeX = 0;
             player.ChangeY = 0;
             player.IsMoving = false;
-            player.IsJump = false;
             player.IsAttackGun = false;
             player.JumpLevel = 0;
             player.ChangeAnimation(player.CharacterDied ? 10 : 0);

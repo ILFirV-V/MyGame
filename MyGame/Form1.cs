@@ -98,6 +98,7 @@ namespace MyGame
             if (PhysicsController.VictoryGame)
             {
                 inscriptionVictoryGame.Visible = true;
+                inscriptionVictoryGame.Text = "Victory Game\r\nСобрана алмазов: " + player.DiamondsCount;
                 buttonOutMenu.Visible = true;
                 PhysicsController.VictoryGame = false;
             }

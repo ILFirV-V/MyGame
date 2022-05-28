@@ -37,6 +37,7 @@ namespace MyGame
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.inscriptionVictoryGame = new System.Windows.Forms.Label();
             this.buttonOutMenu = new System.Windows.Forms.Button();
+            this.TextDeath = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // inscriptionVictoryGame
@@ -48,7 +49,6 @@ namespace MyGame
             this.inscriptionVictoryGame.Name = "inscriptionVictoryGame";
             this.inscriptionVictoryGame.Size = new System.Drawing.Size(661, 400);
             this.inscriptionVictoryGame.TabIndex = 0;
-            this.inscriptionVictoryGame.Text = "Victory Game";
             this.inscriptionVictoryGame.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.inscriptionVictoryGame.Visible = false;
             this.inscriptionVictoryGame.Enter += new System.EventHandler(this.WithdrawInscriptionVictoryGame_Click);
@@ -66,9 +66,20 @@ namespace MyGame
             this.buttonOutMenu.Visible = false;
             this.buttonOutMenu.Click += new System.EventHandler(this.ButtonOutMenu_Click);
             // 
+            // TextDeath
+            // 
+            this.TextDeath.AutoSize = true;
+            this.TextDeath.Location = new System.Drawing.Point(184, 217);
+            this.TextDeath.Name = "TextDeath";
+            this.TextDeath.Size = new System.Drawing.Size(296, 17);
+            this.TextDeath.TabIndex = 2;
+            this.TextDeath.Text = "Повезет в другой раз, искатель сокровищь ";
+            this.TextDeath.Visible = false;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1500, 800);
+            this.Controls.Add(this.TextDeath);
             this.Controls.Add(this.buttonOutMenu);
             this.Controls.Add(this.inscriptionVictoryGame);
             this.DoubleBuffered = true;
@@ -77,6 +88,7 @@ namespace MyGame
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -87,6 +99,7 @@ namespace MyGame
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.Label inscriptionVictoryGame;
         private System.Windows.Forms.Button buttonOutMenu;
+        private System.Windows.Forms.Label TextDeath;
     }
 }
 
