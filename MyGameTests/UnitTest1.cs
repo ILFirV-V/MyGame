@@ -8,7 +8,7 @@ using MyGame.Models;
 namespace MyGameTests
 {
     [TestClass]
-    public class PlayerTests
+    public class MapTests
     {
         [TestMethod]
         public void Payment()

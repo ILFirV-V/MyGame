@@ -66,6 +66,9 @@ namespace MyGame.View
                             PaintPartMap(g, i, j, 320, 140);
                             PaintPartMap(g, i, j, 120, 120);
                             break;
+                        case 14:
+                            PaintPartMap(g, i, j, 160, 40);
+                            break;
                         case 15:
                             PaintPartMap(g, i, j, 320, 140);
                             break;

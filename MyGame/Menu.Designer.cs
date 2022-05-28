@@ -42,8 +42,10 @@ namespace MyGame
             this.StartGameButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.StartGameButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.StartGameButton.BackColor = System.Drawing.Color.Transparent;
-            this.StartGameButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.StartGameButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.StartGameButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.StartGameButton.Font = new System.Drawing.Font("Clarendon Blk BT", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartGameButton.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.StartGameButton.Image = ((System.Drawing.Image)(resources.GetObject("StartGameButton.Image")));
             this.StartGameButton.Location = new System.Drawing.Point(264, 70);
             this.StartGameButton.Name = "StartGameButton";
             this.StartGameButton.Size = new System.Drawing.Size(277, 79);
@@ -57,7 +59,9 @@ namespace MyGame
             this.ExitGameButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ExitGameButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ExitGameButton.BackColor = System.Drawing.Color.LightGray;
-            this.ExitGameButton.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ExitGameButton.Font = new System.Drawing.Font("Clarendon Blk BT", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExitGameButton.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.ExitGameButton.Image = ((System.Drawing.Image)(resources.GetObject("ExitGameButton.Image")));
             this.ExitGameButton.Location = new System.Drawing.Point(264, 289);
             this.ExitGameButton.Name = "ExitGameButton";
             this.ExitGameButton.Size = new System.Drawing.Size(277, 69);
@@ -71,6 +75,9 @@ namespace MyGame
             this.InstructionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.InstructionButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.InstructionButton.BackColor = System.Drawing.Color.LightGray;
+            this.InstructionButton.Font = new System.Drawing.Font("Clarendon Blk BT", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InstructionButton.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.InstructionButton.Image = ((System.Drawing.Image)(resources.GetObject("InstructionButton.Image")));
             this.InstructionButton.Location = new System.Drawing.Point(264, 182);
             this.InstructionButton.Name = "InstructionButton";
             this.InstructionButton.Size = new System.Drawing.Size(277, 72);
@@ -83,8 +90,10 @@ namespace MyGame
             // 
             this.instruction.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.instruction.BackColor = System.Drawing.Color.White;
-            this.instruction.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.instruction.Location = new System.Drawing.Point(26, 47);
+            this.instruction.Font = new System.Drawing.Font("Clarendon Blk BT", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.instruction.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.instruction.Image = ((System.Drawing.Image)(resources.GetObject("instruction.Image")));
+            this.instruction.Location = new System.Drawing.Point(26, 73);
             this.instruction.Name = "instruction";
             this.instruction.Size = new System.Drawing.Size(734, 285);
             this.instruction.TabIndex = 3;
@@ -96,7 +105,11 @@ namespace MyGame
             // buttonExitInstruction
             // 
             this.buttonExitInstruction.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonExitInstruction.Location = new System.Drawing.Point(26, 335);
+            this.buttonExitInstruction.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonExitInstruction.Font = new System.Drawing.Font("Clarendon Blk BT", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExitInstruction.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.buttonExitInstruction.Image = ((System.Drawing.Image)(resources.GetObject("buttonExitInstruction.Image")));
+            this.buttonExitInstruction.Location = new System.Drawing.Point(26, 364);
             this.buttonExitInstruction.Name = "buttonExitInstruction";
             this.buttonExitInstruction.Size = new System.Drawing.Size(734, 60);
             this.buttonExitInstruction.TabIndex = 4;
